@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Character Codex | Vaerik Vharzeth</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/card.css">
+  <link rel="stylesheet" href="css/galeria.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ================================= -->
+  <!-- ESTRUTURA PRINCIPAL -->
+  <!-- ================================= -->
+
+  <div class="app-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+      <div class="brand">
+        <span class="brand-icon">✦</span>
+
+        <div>
+          <h2>CHARACTER</h2>
+          <span>CODEX</span>
+        </div>
+      </div>
+
+
+      <div class="sidebar-character">
+
+        <img src="assets/personagens/facial.png" alt="Retrato de Vaerik Vharzeth" onerror="this.style.display='none'">
+
+        <div>
+          <strong>Vaerik Vharzeth</strong>
+          <small>O Corvo · Ladino</small>
+        </div>
+
+      </div>
+
+
+      <nav class="sidebar-nav">
+
+        <span class="nav-label">PERSONAGEM</span>
+
+        <button class="nav-link active" data-page="dashboard">
+          <span>◈</span>
+          Visão geral
+        </button>
+
+        <button class="nav-link" data-page="ficha">
+          <span>▤</span>
+          Ficha técnica
+        </button>
+
+        <button class="nav-link" data-page="inventario">
+          <span>⚒</span>
+          Inventário
+        </button>
+
+
+        <span class="nav-label">ARQUIVO PESSOAL</span>
+
+        <button class="nav-link" data-page="arquivo">
+          <span>📜</span>
+          Lore completa
+        </button>
+
+        <button class="nav-link" data-page="curiosidades">
+          <span>✧</span>
+          Curiosidades
+        </button>
+
+        <button class="nav-link" data-page="galeria">
+          <span>▧</span>
+          Galeria de tokens
+        </button>
+
+      </nav>
+
+
+      <div class="sidebar-footer">
+        <span>GUARDIÕES DO DESTINO</span>
+        <small>Character Codex v0.2</small>
+      </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <main class="main-content">
+
+      <header class="topbar">
+
+        <div>
+          <span class="eyebrow">ARQUIVO DE PERSONAGEM</span>
+          <h1 id="page-title">Visão geral</h1>
+        </div>
+
+        <div class="topbar-actions">
+
+          <button id="export-json" class="secondary-button">
+            Exportar backup
+          </button>
+
+          <label for="import-json" class="secondary-button">
+            Importar backup
+          </label>
+
+          <input type="file" id="import-json" accept=".json" hidden>
+
+          <button id="print-sheet" class="primary-button">
+            Exportar PDF
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ================================= -->
+      <!-- DASHBOARD -->
+      <!-- ================================= -->
+
+      <section class="page active" id="page-dashboard">
+
+        <div class="hero-panel">
+
+          <div class="hero-image">
+
+            <img src="assets/personagens/facial.png" alt="Vaerik Vharzeth" onerror="this.style.display='none'">
+
+          </div>
+
+
+          <div class="hero-information">
+
+            <span class="eyebrow">
+              TIEFLING · LADINO
+            </span>
+
+            <h2>Vaerik Vharzeth</h2>
+
+            <p class="hero-nickname">"O Corvo"</p>
+
+            <div class="hero-details">
+              <span>Nível <strong id="hero-level">1</strong></span>
+              <span>Origem <strong>Khar-Vhar</strong></span>
+              <span>Local <strong>Valedouro, Alyndor</strong></span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- RECURSOS -->
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">ESTADO ATUAL</span>
+            <h3>Recursos</h3>
+          </div>
+        </div>
+
+
+        <div class="resource-grid">
+
+          <div class="resource-card pv-card">
+
+            <span>VIDA</span>
+
+            <strong id="dash-pv">15</strong>
+
+            <small id="pv-caption">15 / 15</small>
+
+            <div class="resource-bar">
+              <div id="pv-meter"></div>
+            </div>
+
+          </div>
+
+
+          <div class="resource-card pm-card">
+
+            <span>MANA</span>
+
+            <strong id="dash-pm">16</strong>
+
+            <small id="pm-caption">16 / 16</small>
+
+            <div class="resource-bar">
+              <div id="pm-meter"></div>
+            </div>
+
+          </div>
+
+
+          <div class="resource-card sanity-card">
+
+            <span>SANIDADE</span>
+
+            <strong id="dash-san">16</strong>
+
+            <small id="san-caption">16 / 16</small>
+
+            <div class="resource-bar">
+              <div id="san-meter"></div>
+            </div>
+
+          </div>
+
+
+          <div class="resource-card fate-card">
+
+            <span>DESTINO</span>
+
+            <strong id="dash-fate">3</strong>
+
+            <small>Pontos disponíveis</small>
+
+          </div>
+
+        </div>
+
+
+        <!-- ATRIBUTOS -->
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">CAPACIDADES</span>
+            <h3>Atributos</h3>
+          </div>
+
+          <button class="text-button" data-goto="ficha">
+            Ver ficha completa →
+          </button>
+        </div>
+
+
+        <div class="attributes-grid" id="dashboard-attributes"></div>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="dashboard-bottom">
+
+          <div class="panel">
+
+            <span class="eyebrow">IDENTIDADE</span>
+
+            <h3>Informações gerais</h3>
+
+            <div class="info-row">
+              <span>Nome completo</span>
+              <strong>Vaerik Vharzeth</strong>
+            </div>
+
+            <div class="info-row">
+              <span>Apelido</span>
+              <strong>O Corvo</strong>
+            </div>
+
+            <div class="info-row">
+              <span>Raça</span>
+              <strong>Tiefling</strong>
+            </div>
+
+            <div class="info-row">
+              <span>Classe</span>
+              <strong>Ladino</strong>
+            </div>
+
+            <div class="info-row">
+              <span>Idade aparente</span>
+              <strong>18 anos</strong>
+            </div>
+
+            <div class="info-row">
+              <span>Altura</span>
+              <strong>1,80 m</strong>
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <span class="eyebrow">PERSONALIDADE</span>
+
+            <h3>O homem por trás do Corvo</h3>
+
+            <p>
+              Calculista, desconfiado e observador.
+              Vaerik prefere compreender as intenções
+              das pessoas antes de revelar as próprias.
+            </p>
+
+            <p>
+              Para ele, informação é uma ferramenta
+              e confiança é algo que precisa ser conquistado.
+            </p>
+
+            <button class="text-button" data-goto="arquivo">
+              Conhecer sua história →
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================= -->
+      <!-- FICHA TÉCNICA -->
+      <!-- ================================= -->
+
+      <section class="page" id="page-ficha">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">SISTEMA D100</span>
+            <h3>Atributos</h3>
+          </div>
+        </div>
+
+
+        <div class="panel">
+          <div id="attribute-editor" class="attribute-editor"></div>
+        </div>
+
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">RECURSOS DO PERSONAGEM</span>
+            <h3>Vida, Mana e Sanidade</h3>
+          </div>
+        </div>
+
+
+        <div class="panel">
+          <div id="resource-editor" class="resource-editor"></div>
+        </div>
+
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">PROBABILIDADE DE SUCESSO</span>
+            <h3>Perícias</h3>
+          </div>
+
+          <span id="skill-points-label">0 / 6 pontos distribuídos</span>
+        </div>
+
+
+        <div class="panel table-panel">
+
+          <table class="skills-table">
+
+            <thead>
+              <tr>
+                <th>Perícia</th>
+                <th>Atributo</th>
+                <th>Pontos</th>
+                <th>Chance</th>
+              </tr>
+            </thead>
+
+            <tbody id="skills-table"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">COMBATE</span>
+            <h3>Valores derivados</h3>
+          </div>
+        </div>
+
+
+        <div class="combat-grid" id="combat-values"></div>
+
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">HABILIDADES ESPECIAIS</span>
+            <h3>Características de Vaerik</h3>
+          </div>
+        </div>
+
+
+        <div class="abilities-grid" id="abilities-list"></div>
+
+      </section>
+
+
+      <!-- ================================= -->
+      <!-- INVENTÁRIO -->
+      <!-- ================================= -->
+
+      <section class="page" id="page-inventario">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">PERTENCES</span>
+            <h3>Inventário</h3>
+          </div>
+
+          <button id="add-item" class="primary-button">
+            + Adicionar item
+          </button>
+        </div>
+
+
+        <div class="capacity-grid">
+
+          <div class="panel">
+            <span class="eyebrow">CAPACIDADE MÁXIMA</span>
+            <strong id="capacity">5 kg</strong>
+          </div>
+
+          <div class="panel">
+            <span class="eyebrow">PESO CARREGADO</span>
+            <strong id="carried">0 kg</strong>
+          </div>
+
+          <div class="panel">
+            <span class="eyebrow">ESPAÇO RESTANTE</span>
+            <strong id="remaining">5 kg</strong>
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">EQUIPAMENTOS E OBJETOS</span>
+              <h3>Itens carregados</h3>
+            </div>
+          </div>
+
+          <div id="inventory-list"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================= -->
+      <!-- LORE -->
+      <!-- ================================= -->
+
+      <section class="page" id="page-arquivo">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">HISTÓRIA DO PERSONAGEM</span>
+            <h3 id="lore-title">História de Vaerik</h3>
+            <p class="muted" id="lore-subtitle"></p>
+          </div>
+        </div>
+
+
+        <div id="lore-container" class="lore-container">
+          <p>Carregando história...</p>
+        </div>
+
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">ANOTAÇÕES DE CAMPANHA</span>
+            <h3>Diário pessoal</h3>
+          </div>
+        </div>
+
+
+        <div class="panel">
+          <textarea id="journal" placeholder="Registre acontecimentos, pistas, nomes e suspeitas..."></textarea>
+        </div>
+
+      </section>
+
+
+      <!-- ================================= -->
+      <!-- CURIOSIDADES -->
+      <!-- ================================= -->
+
+      <section class="page" id="page-curiosidades">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">DETALHES E SEGREDOS</span>
+            <h3 id="curiosities-title">Curiosidades</h3>
+          </div>
+        </div>
+
+
+        <div id="curiosities-container" class="curiosities-grid">
+          <p>Carregando curiosidades...</p>
+        </div>
+
+      </section>
+
+
+      <!-- ================================= -->
+      <!-- GALERIA GERAL -->
+      <!-- ================================= -->
+
+      <section class="page" id="page-galeria">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">ARQUIVO VISUAL</span>
+            <h3>Galeria de imagens</h3>
+            <p class="muted">
+              Todos os recursos visuais disponíveis na ficha de Vaerik.
+            </p>
+          </div>
+        </div>
+
+        <div class="gallery-intro panel">
+          <div>
+            <h3>Arquivo visual de Vaerik Vharzeth</h3>
+
+            <p>
+              Consulte, visualize e baixe os arquivos originais
+              de personagens, equipamentos e tokens.
+            </p>
+          </div>
+        </div>
+
+        <div class="gallery-filters">
+
+          <button class="gallery-filter active" onclick="filtrarGaleria('Todos', this)">
+            Todas as imagens
+          </button>
+
+          <button class="gallery-filter" onclick="filtrarGaleria('Personagens', this)">
+            Personagens
+          </button>
+
+          <button class="gallery-filter" onclick="filtrarGaleria('Equipamentos', this)">
+            Equipamentos
+          </button>
+
+          <button class="gallery-filter" onclick="filtrarGaleria('Tokens', this)">
+            Tokens
+          </button>
+
+        </div>
+
+        <div id="gallery-grid" class="gallery-grid"></div>
+
+      </section>
+
+
+      <!-- ================================= -->
+      <!-- ÁREA DE IMPRESSÃO -->
+      <!-- ================================= -->
+
+      <section id="print-area">
+
+        <div class="print-header">
+          <h1>Vaerik Vharzeth</h1>
+          <p>Ficha de personagem — Guardiões do Destino</p>
+        </div>
+
+        <div id="print-inventory-content"></div>
+
+      </section>
+
+
+      <!-- TOAST -->
+
+      <div id="toast" class="toast"></div>
+
+    </main>
+
+  </div>
+
+
+  <!-- ================================= -->
+  <!-- SCRIPTS -->
+  <!-- ================================= -->
+
+  <script src="https://unpkg.com/pdfmake@0.2/build/pdfmake.min.js"></script>
+  <script src="https://unpkg.com/pdfmake@0.2/build/vfs_fonts.js"></script>
+
+  <script src="js/dados.js"></script>
+  <script src="js/abrir-card.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/galeria.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

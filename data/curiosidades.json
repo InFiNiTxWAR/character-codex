@@ -1,0 +1,105 @@
+{
+  "titulo": "Curiosidades sobre Vaerik Vharzeth",
+  "curiosidades": [
+    {
+      "categoria": "Gostos Pessoais",
+      "titulo": "Comidas e Bebidas",
+      "descricao": "Prefere carne assada lentamente com batatas, ervas e molhos fortes. Sua bebida favorita é vinho tinto seco, mas evita ficar embriagado para não entregar vantagens aos outros. Apesar de não admitir, tem uma queda por chocolate amargo e frutas vermelhas."
+    },
+    {
+      "categoria": "Gostos Pessoais",
+      "titulo": "Clima e Estação",
+      "descricao": "Sua estação favorita é o outono. Prefere noites frias e chuvosas, pois a chuva abafa os sons, dificulta rastros e deixa as pessoas menos atentas. Não gosta de calor sufocante."
+    },
+    {
+      "categoria": "Gostos Pessoais",
+      "titulo": "Apreciação Estética",
+      "descricao": "Tem preferência por cores discretas e elegantes, como o preto e tons de vinho escuro. Gosta de ambientes altos, silenciosos e com boa visibilidade, onde pode observar a todos sem ser o centro das atenções."
+    },
+    {
+      "categoria": "Hobbies e Manias",
+      "titulo": "Hábitos de Observação",
+      "descricao": "Costuma memorizar rostos, nomes e pequenos detalhes das pessoas. Quando está desconfiado, observa as mãos das pessoas antes de olhar para os rostos. Gosta de observar desconhecidos para descobrir quem está mentindo ou escondendo algo."
+    },
+    {
+      "categoria": "Hobbies e Manias",
+      "titulo": "Cuidados e Treinos",
+      "descricao": "Gosta de cuidar pessoalmente de seus punhais e limpar seus equipamentos antes de dormir. Costuma praticar movimentos silenciosos e treinar golpes quando está sozinho. Além disso, sempre identifica pelo menos duas rotas de saída ao entrar em qualquer ambiente."
+    },
+    {
+      "categoria": "Hobbies e Manias",
+      "titulo": "Leitura e Estratégia",
+      "descricao": "Tem forte interesse por livros sobre história, política, estratégias militares e comportamento humano. Adora resolver enigmas e jogos de estratégia, especialmente os que permitem vencer sem usar a força. Odeia quando alguém entrega a resposta antes que ele descubra."
+    },
+    {
+      "categoria": "Hobbies e Manias",
+      "titulo": "Pequenos Costumes",
+      "descricao": "Costuma girar um punhal entre os dedos quando está pensando. Guarda pequenos objetos que considera interessantes, como moedas antigas e anéis. Raramente fica de costas para uma porta e tem dificuldade em permanecer sem fazer nada, estando sempre atento ao ambiente."
+    },
+    {
+      "categoria": "Pensamentos",
+      "titulo": "Visão sobre o Amor",
+      "descricao": "Não acredita que o amor seja necessariamente bonito. Enxerga o sentimento como uma vulnerabilidade e uma forma de entregar uma arma a alguém. Precisaria admirar a inteligência e a capacidade de alguém de confrontá-lo e perceber suas manipulações para se apaixonar. Seu maior problema seria confundir intimidade com perda de controle."
+    },
+    {
+      "categoria": "Pensamentos",
+      "titulo": "Visão sobre Amizade",
+      "descricao": "Acredita que amizade é baseada em confiança, interesses compartilhados e convivência, mas não confia completamente em ninguém. Prefere pessoas competentes e que pensem por conta própria. Quando alguém entra em seu círculo, torna-se surpreendentemente protetor, demonstrando cuidado através de ações, não de palavras."
+    },
+    {
+      "categoria": "Pensamentos",
+      "titulo": "Dinheiro, Poder e Autoridade",
+      "descricao": "Vê o dinheiro como uma ferramenta para obter liberdade e alternativas. Enxerga o poder como segurança, garantindo que ele nunca precise implorar ou obedecer. Não respeita títulos, mas sim competência, inteligência e capacidade de influência."
+    },
+    {
+      "categoria": "Pensamentos",
+      "titulo": "Lealdade e Justiça",
+      "descricao": "Despreza a lealdade cega, preferindo alguém que escolha ficar ao seu lado tendo outras opções. Não tem uma visão idealizada de justiça, acreditando que muitas vezes ela é apenas uma justificativa usada por quem tem poder para definir o que é certo."
+    },
+    {
+      "categoria": "Relacionamentos",
+      "titulo": "A Relação com Thalen",
+      "descricao": "Thalen é a única pessoa capaz de fazer Vaerik abandonar sua postura calculista. Vaerik reclama das perguntas dele, mas responde; finge não prestar atenção nas histórias, mas memoriza os detalhes; e, se alguém ameaça o Pardal, sua postura muda imediatamente. Vaerik o considera imprudente e barulhento, mas sabe que sua vida teria sido muito diferente sem ele."
+    },
+    {
+      "categoria": "Medos e Inseguranças",
+      "titulo": "A Perda de Controle e a Manipulação",
+      "descricao": "Seu maior medo é estar completamente à mercê de outra pessoa. Considera humilhante ser manipulado sem perceber. Também teme ser descartado novamente (como aconteceu em Khar-Vhar) e nutre uma preocupação silenciosa com a possibilidade de ser esquecido."
+    },
+    {
+      "categoria": "Medos e Inseguranças",
+      "titulo": "A Carta Misteriosa",
+      "descricao": "A carta não aberta que carrega consigo é uma fonte constante de ansiedade. Ele teme mais descobrir a verdade sobre o conteúdo dela do que continuar vivendo sem respostas."
+    },
+    {
+      "categoria": "Preferências",
+      "titulo": "O Que Gosta",
+      "descricao": "Silêncio, estratégia, vinho tinto, noites frias, pessoas inteligentes, jogos mentais, livros antigos, independência, honestidade estratégica e lugares discretos."
+    },
+    {
+      "categoria": "Aversões",
+      "titulo": "O Que Não Gosta",
+      "descricao": "Barulho desnecessário, impulsividade, bebidas excessivamente doces, calor sufocante, arrogância sem competência, ser enganado, conversas superficiais, dependência excessiva, promessas vazias e ser o centro das atenções."
+    },
+    {
+      "categoria": "Citações",
+      "titulo": "Frases Marcantes",
+      "descricao": "\"Não preciso que gostem de mim. Preciso que entendam as consequências de ficarem contra mim.\" / \"Toda pessoa possui um preço. Algumas apenas são inteligentes o suficiente para escondê-lo.\" / \"Não existe problema em confiar em alguém. O problema é esquecer que essa pessoa também pode escolher trair você.\" / \"Não confunda minha paciência com tolerância.\" / \"Não tenho interesse em ser lembrado como alguém bom. Prefiro ser lembrado como alguém que ninguém conseguiu controlar.\""
+    },
+    {
+      "categoria": "Detalhes Humanos",
+      "titulo": "Hábitos e Sutilezas",
+      "descricao": "Tem o sono leve e acorda com qualquer ruído. Não gosta de receber presentes por medo de criar obrigações. Não é bom em demonstrar gratidão e não gosta de admitir quando está errado. Quando está realmente irritado, fica em silêncio em vez de gritar. Tem excelente memória para ofensas, mas também para pequenos gestos de gentileza."
+    },
+    {
+      "categoria": "Detalhes Humanos",
+      "titulo": "Tranquilidade e Crianças",
+      "descricao": "Apesar da personalidade calculista, aprecia momentos simples de tranquilidade quando não precisa desconfiar de ninguém. Não gosta de crianças barulhentas, mas seria incapaz de ignorar uma criança em perigo."
+    },
+    {
+      "categoria": "Contradição Central",
+      "titulo": "O Paradoxo do Controle",
+      "descricao": "Vaerik passou a vida tentando não depender de ninguém, acreditando que o controle é a única forma de garantir sua liberdade. No entanto, sua sobrevivência após o selamento dependeu inteiramente de um garoto que não tinha obrigação alguma de ajudá-lo. Talvez ele ainda não tenha percebido que as coisas mais importantes de sua vida aconteceram quando ele não tinha controle nenhum."
+    }
+  ]
+}

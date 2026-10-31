@@ -1,0 +1,315 @@
+/* ==========================================
+   CHARACTER CODEX — CARDS DO INVENTÁRIO
+========================================== */
+
+/* FUNDO DO CARD */
+
+.card-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(7px);
+
+    animation: cardFundo 0.2s ease;
+}
+
+/* CARD PRINCIPAL */
+
+.inventory-card {
+    position: relative;
+
+    width: 100%;
+    max-width: 430px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    color: #e9e1d2;
+    background: linear-gradient(145deg, #211d1a, #121110);
+
+    border: 1px solid #65513a;
+    border-radius: 12px;
+
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.7);
+
+    animation: cardEntrada 0.25s ease;
+}
+
+/* BOTÃO FECHAR */
+
+.card-fechar {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+
+    width: 35px;
+    height: 35px;
+
+    color: #c8b89e;
+    background: transparent;
+
+    border: 1px solid #514332;
+    border-radius: 50%;
+
+    font-size: 25px;
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+.card-fechar:hover {
+    color: white;
+    background: #49372a;
+}
+
+/* ==========================================
+   IMAGEM DO ITEM — PROPORÇÃO 1:1
+========================================== */
+
+.card-imagem {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 260px;
+
+    aspect-ratio: 1 / 1;
+
+    margin: 0 auto 22px;
+
+    overflow: hidden;
+
+    background: radial-gradient(
+        circle,
+        #45372a,
+        #1b1714 70%
+    );
+
+    border: 1px solid #514332;
+    border-radius: 8px;
+
+    box-shadow:
+        inset 0 0 25px rgba(0, 0, 0, 0.5),
+        0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* IMAGEM */
+
+.card-imagem img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    padding: 12px;
+    box-sizing: border-box;
+
+    filter: drop-shadow(
+        0 8px 12px rgba(0, 0, 0, 0.6)
+    );
+
+    animation: imagemEntrada 0.3s ease;
+}
+
+/* EMOJI ALTERNATIVO */
+
+.card-imagem span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 75px;
+
+    filter: drop-shadow(
+        0 5px 12px rgba(0, 0, 0, 0.5)
+    );
+}
+
+/* ==========================================
+   INFORMAÇÕES DO ITEM
+========================================== */
+
+.card-categoria {
+    color: #b69a70;
+
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.inventory-card h2 {
+    margin: 8px 0 15px;
+
+    color: #e8d6b8;
+    font-family: Georgia, serif;
+    font-size: 27px;
+}
+
+.card-descricao {
+    color: #bcb2a5;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ==========================================
+   QUANTIDADE E PESO
+========================================== */
+
+.card-informacoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    margin-top: 24px;
+}
+
+.card-informacoes div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    padding: 14px;
+
+    background: #29231e;
+    border: 1px solid #44382c;
+    border-radius: 7px;
+}
+
+.card-informacoes small {
+    color: #9b896f;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.card-informacoes strong {
+    color: #e8d6b8;
+    font-size: 17px;
+}
+
+/* ==========================================
+   CONTEÚDO ESPECIAL
+========================================== */
+
+.card-subtitulo {
+    margin-top: 25px;
+    margin-bottom: 12px;
+
+    color: #b69a70;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.card-conteudo-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.card-conteudo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 11px;
+
+    color: #c9bdad;
+    background: #29231e;
+
+    border: 1px solid #44382c;
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+/* ==========================================
+   RODAPÉ
+========================================== */
+
+.card-rodape {
+    margin-top: 25px;
+    padding-top: 15px;
+
+    color: #786b5a;
+    border-top: 1px solid #44382c;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* ==========================================
+   ANIMAÇÕES
+========================================== */
+
+@keyframes cardFundo {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes cardEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes imagemEntrada {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 480px) {
+    .inventory-card {
+        padding: 22px;
+    }
+
+    .card-imagem {
+        max-width: 220px;
+    }
+
+    .inventory-card h2 {
+        font-size: 23px;
+    }
+}
