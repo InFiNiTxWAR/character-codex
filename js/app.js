@@ -74,7 +74,9 @@ function chance(pericia) {
 // ==========================================
 
 function atualizarDashboard() {
-    $("hero-level").textContent = personagem.nivel;
+    if ($("hero-level")) {
+        $("hero-level").textContent = personagem.nivel;
+    }
 
     [
         ["pv", "pv"],
@@ -106,16 +108,20 @@ function atualizarDashboard() {
         }
     });
 
-    $("dash-fate").textContent = personagem.recursos.destino;
+    if ($("dash-fate")) {
+        $("dash-fate").textContent = personagem.recursos.destino;
+    }
 
-    $("dashboard-attributes").innerHTML =
-        Object.entries(personagem.atributos).map(([k, v]) => `
-            <div class="attribute">
-                <b>${v * 4}%</b>
-                <span>${nomesAtributos[k]}</span>
-                <small>${v} ponto(s)</small>
-            </div>
-        `).join("");
+    if ($("dashboard-attributes")) {
+        $("dashboard-attributes").innerHTML =
+            Object.entries(personagem.atributos).map(([k, v]) => `
+                <div class="attribute">
+                    <b>${v * 4}%</b>
+                    <span>${nomesAtributos[k]}</span>
+                    <small>${v} ponto(s)</small>
+                </div>
+            `).join("");
+    }
 }
 
 
@@ -127,118 +133,135 @@ function renderFicha() {
 
     // ATRIBUTOS
 
-    $("attribute-editor").innerHTML =
-        Object.entries(personagem.atributos).map(([k, v]) => `
-            <div class="attr-input">
-                <label>${nomesAtributos[k]}</label>
+    if ($("attribute-editor")) {
+        $("attribute-editor").innerHTML =
+            Object.entries(personagem.atributos).map(([k, v]) => `
+                <div class="attr-input">
+                    <label>${nomesAtributos[k]}</label>
 
-                <input
-                    type="number"
-                    min="0"
-                    max="10"
-                    data-attr="${k}"
-                    value="${v}"
-                >
+                    <input
+                        type="number"
+                        min="0"
+                        max="10"
+                        data-attr="${k}"
+                        value="${v}"
+                    >
 
-                <strong>${v * 4}% base</strong>
-            </div>
-        `).join("");
+                    <strong>${v * 4}% base</strong>
+                </div>
+            `).join("");
+    }
 
 
     // RECURSOS
 
-    $("resource-editor").innerHTML = [
-        ["pv", "PV"],
-        ["pvMax", "PV máximo"],
-        ["pm", "PM"],
-        ["pmMax", "PM máximo"],
-        ["sanidade", "Sanidade"],
-        ["sanidadeMax", "Sanidade máxima"],
-        ["destino", "Pontos de destino"]
-    ].map(([k, n]) => `
-        <div class="resource-input">
-            <label>${n}</label>
+    if ($("resource-editor")) {
+        $("resource-editor").innerHTML = [
+            ["pv", "PV"],
+            ["pvMax", "PV máximo"],
+            ["pm", "PM"],
+            ["pmMax", "PM máximo"],
+            ["sanidade", "Sanidade"],
+            ["sanidadeMax", "Sanidade máxima"],
+            ["destino", "Pontos de destino"]
+        ].map(([k, n]) => `
+            <div class="resource-input">
+                <label>${n}</label>
 
-            <input
-                type="number"
-                min="0"
-                data-resource="${k}"
-                value="${personagem.recursos[k]}"
-            >
-        </div>
-    `).join("");
+                <input
+                    type="number"
+                    min="0"
+                    data-resource="${k}"
+                    value="${personagem.recursos[k]}"
+                >
+            </div>
+        `).join("");
+    }
 
 
     // PERÍCIAS
 
-    $("skills-table").innerHTML =
-        personagem.pericias.map((p, i) => `
-            <tr>
-                <td>${p[0]}</td>
-                <td>${p[1]}</td>
+    if ($("skills-table")) {
+        $("skills-table").innerHTML =
+            personagem.pericias.map((p, i) => `
+                <tr>
+                    <td>${p[0]}</td>
+                    <td>${p[1]}</td>
 
-                <td>
-                    <input
-                        type="number"
-                        min="0"
-                        max="6"
-                        value="${p[2]}"
-                        data-skill="${i}"
-                    >
-                </td>
+                    <td>
+                        <input
+                            type="number"
+                            min="0"
+                            max="6"
+                            value="${p[2]}"
+                            data-skill="${i}"
+                        >
+                    </td>
 
-                <td>${chance(p)}%</td>
-            </tr>
-        `).join("");
+                    <td>${chance(p)}%</td>
+                </tr>
+            `).join("");
+    }
 
     const usados = personagem.pericias.reduce(
         (s, p) => s + p[2],
         0
     );
 
-    $("skill-points-label").textContent =
-        `${usados} / 6 pontos distribuídos`;
+    if ($("skill-points-label")) {
+        $("skill-points-label").textContent =
+            `${usados} / 6 pontos distribuídos`;
+    }
 
 
-    // COMBATE
+    // COMBATE E TALENTOS
 
     const a = personagem.atributos;
 
-    $("combat-values").innerHTML = [
-        [
-            "Defesa passiva",
-            "38%",
-            "Valor de referência; revisar bônus de equipamento."
-        ],
-        [
-            "Defesa ativa",
-            "19%",
-            "Antes de modificadores situacionais."
-        ],
-        [
-            "Capacidade de carga",
-            `${a.FOR * 5} kg`,
-            "Força × 5."
-        ]
-    ].map(x => `
-        <div class="combat-card">
-            <small>${x[0]}</small>
-            <strong>${x[1]}</strong>
-            <small>${x[2]}</small>
-        </div>
-    `).join("");
+    if ($("combat-values")) {
+        $("combat-values").innerHTML = [
+            [
+                "Defesa passiva",
+                "38%",
+                "Valor de referência; revisar bônus de equipamento."
+            ],
+            [
+                "Defesa ativa",
+                "19%",
+                "Antes de modificadores situacionais."
+            ],
+            [
+                "Capacidade de carga",
+                `${a.FOR * 5} kg`,
+                "Força × 5."
+            ],
+            [
+                "Astúcia — Talento inicial",
+                "+10%",
+                "Bônus em Enganação, Manipulação e truques sociais."
+            ]
+        ].map(x => `
+            <div class="combat-card">
+                <small>${x[0]}</small>
+                <strong>${x[1]}</strong>
+                <small>${x[2]}</small>
+            </div>
+        `).join("");
+    }
 
 
     // HABILIDADES
 
-    $("abilities-list").innerHTML =
-        personagem.habilidades.map(h => `
-            <div class="panel">
-                <span class="eyebrow">${h.tipo}</span>
-                <h3>${h.nome}</h3>
-                <p>${h.descricao}</p>
-            </div>
-        `).join("");
+    if ($("abilities-list")) {
+        $("abilities-list").innerHTML =
+            (personagem.habilidades || []).map(h => `
+                <div class="panel">
+                    <span class="eyebrow">${h.tipo}</span>
+                    <h3>${h.nome}</h3>
+                    <p>${h.descricao}</p>
+                </div>
+            `).join("");
+    }
 
 
     // EVENTOS DOS ATRIBUTOS
@@ -286,6 +309,8 @@ function renderFicha() {
 
 function atualizarInventario() {
 
+    if (!$("inventory-list")) return;
+
     const capacidade = personagem.atributos.FOR * 5;
 
     const peso = personagem.inventario.reduce(
@@ -293,16 +318,25 @@ function atualizarInventario() {
         0
     );
 
-    $("capacity").textContent = capacidade + " kg";
-    $("carried").textContent = peso.toFixed(1) + " kg";
+    if ($("capacity")) {
+        $("capacity").textContent = capacidade + " kg";
+    }
 
-    $("remaining").textContent =
-        (capacidade - peso).toFixed(1) + " kg";
+    if ($("carried")) {
+        $("carried").textContent = peso.toFixed(1) + " kg";
+    }
+
+    if ($("remaining")) {
+        $("remaining").textContent =
+            (capacidade - peso).toFixed(1) + " kg";
+    }
 
 
     $("inventory-list").innerHTML =
         personagem.inventario.map((i, n) => `
-<div class="item-row" data-card="${n}" style="cursor:pointer;">                <div>
+            <div class="item-row item-row-clicavel" data-card="${n}">
+
+                <div class="item-row-info">
                     <b>${i.nome} ×${i.quantidade}</b>
 
                     <small>
@@ -310,15 +344,24 @@ function atualizarInventario() {
                     </small>
                 </div>
 
+                <span class="item-card-hint">
+                    ⓘ Ver detalhes
+                </span>
+
                 <button data-remove="${n}">
                     Remover
                 </button>
+
             </div>
         `).join("");
 
 
+    // REMOVER ITEM
+
     document.querySelectorAll("[data-remove]").forEach(b => {
-        b.onclick = () => {
+        b.onclick = e => {
+            e.stopPropagation();
+
             personagem.inventario.splice(
                 Number(b.dataset.remove),
                 1
@@ -331,147 +374,12 @@ function atualizarInventario() {
 
 
 // ==========================================
-// GALERIA DE TOKENS
-// ==========================================
-
-function renderTokens() {
-
-    const grid = $("token-grid");
-
-    if (!grid) return;
-
-    grid.innerHTML = Array.from({ length: 7 }, (_, i) => {
-
-        // Dois espaços entre token e parênteses
-        const nome = `token  (${i + 1}).png`;
-
-        const caminho = `assets/tokens/${nome}`;
-
-        return `
-            <div class="token-slot">
-
-                <img
-                    src="${caminho}"
-                    alt="Token ${i + 1} de Vaerik"
-                    data-token="${caminho}"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
-                >
-
-                <span style="display:none">
-                    ${nome}<br>
-                    <small>Imagem não encontrada</small>
-                </span>
-
-            </div>
-        `;
-
-    }).join("");
-
-
-    // CRIAR MODAL
-
-    let modal = document.querySelector(".token-modal");
-
-    if (!modal) {
-
-        modal = document.createElement("div");
-
-        modal.className = "token-modal";
-
-        modal.innerHTML = `
-            <button class="token-modal-close" aria-label="Fechar">
-                ×
-            </button>
-
-            <div class="token-modal-content">
-
-                <img
-                    id="token-modal-image"
-                    src=""
-                    alt="Token ampliado"
-                >
-
-                <div class="token-modal-actions">
-
-                    <a id="token-download" href="" download>
-                        ↓ Baixar imagem
-                    </a>
-
-                    <button id="token-close">
-                        Fechar
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        modal.querySelector(".token-modal-close").onclick =
-            fecharToken;
-
-        modal.querySelector("#token-close").onclick =
-            fecharToken;
-
-        modal.addEventListener("click", e => {
-            if (e.target === modal) {
-                fecharToken();
-            }
-        });
-    }
-
-
-    // ABRIR TOKEN AMPLIADO
-
-    grid.querySelectorAll("[data-token]").forEach(img => {
-
-        img.addEventListener("click", () => {
-
-            const caminho = img.dataset.token;
-
-            $("token-modal-image").src = caminho;
-
-            $("token-download").href = caminho;
-
-            $("token-download").download =
-                caminho.split("/").pop();
-
-            modal.classList.add("open");
-        });
-
-    });
-
-
-    function fecharToken() {
-
-        modal.classList.remove("open");
-
-        $("token-modal-image").src = "";
-    }
-
-
-    // FECHAR COM ESC
-
-    document.addEventListener("keydown", e => {
-
-        if (e.key === "Escape") {
-            fecharToken();
-        }
-
-    });
-}
-
-
-// ==========================================
 // LORE E CURIOSIDADES — JSON
 // ==========================================
 
 async function carregarArquivoPessoal() {
 
     try {
-
-        // BUSCAR OS ARQUIVOS JSON
 
         const respostaLore = await fetch("data/lore.json");
 
@@ -491,51 +399,60 @@ async function carregarArquivoPessoal() {
 
         // TÍTULO DA LORE
 
-        $("lore-title").textContent = lore.titulo;
+        if ($("lore-title")) {
+            $("lore-title").textContent = lore.titulo;
+        }
 
-        $("lore-subtitle").textContent = lore.subtitulo;
+        if ($("lore-subtitle")) {
+            $("lore-subtitle").textContent = lore.subtitulo;
+        }
 
 
         // CAPÍTULOS DA HISTÓRIA
 
-        $("lore-container").innerHTML =
-            lore.capitulos.map(capitulo => `
-                <article class="panel lore-chapter">
+        if ($("lore-container")) {
+            $("lore-container").innerHTML =
+                lore.capitulos.map(capitulo => `
+                    <article class="panel lore-chapter">
 
-                    <span class="eyebrow">
-                        REGISTRO HISTÓRICO
-                    </span>
+                        <span class="eyebrow">
+                            REGISTRO HISTÓRICO
+                        </span>
 
-                    <h3>${capitulo.titulo}</h3>
+                        <h3>${capitulo.titulo}</h3>
 
-                    ${capitulo.conteudo.map(paragrafo => `
-                        <p>${paragrafo}</p>
-                    `).join("")}
+                        ${capitulo.conteudo.map(paragrafo => `
+                            <p>${paragrafo}</p>
+                        `).join("")}
 
-                </article>
-            `).join("");
+                    </article>
+                `).join("");
+        }
 
 
         // CURIOSIDADES
 
-        $("curiosities-title").textContent =
-            curiosidades.titulo;
+        if ($("curiosities-title")) {
+            $("curiosities-title").textContent =
+                curiosidades.titulo;
+        }
 
+        if ($("curiosities-container")) {
+            $("curiosities-container").innerHTML =
+                curiosidades.curiosidades.map(item => `
+                    <article class="panel curiosity-card">
 
-        $("curiosities-container").innerHTML =
-            curiosidades.curiosidades.map(item => `
-                <article class="panel curiosity-card">
+                        <span class="eyebrow">
+                            ${item.categoria}
+                        </span>
 
-                    <span class="eyebrow">
-                        ${item.categoria}
-                    </span>
+                        <h3>${item.titulo}</h3>
 
-                    <h3>${item.titulo}</h3>
+                        <p>${item.descricao}</p>
 
-                    <p>${item.descricao}</p>
-
-                </article>
-            `).join("");
+                    </article>
+                `).join("");
+        }
 
 
     } catch (erro) {
@@ -582,22 +499,52 @@ function irPagina(nome) {
         inventario: "Inventário",
         arquivo: "Arquivo pessoal",
         curiosidades: "Curiosidades",
-        galeria: "Galeria de tokens"
+        galeria: "Galeria de imagens",
+        cronologia: "Memórias & Cronologia"
     };
 
-    $("page-title").textContent =
-        titulos[nome] || "Character Codex";
+    if ($("page-title")) {
+        $("page-title").textContent =
+            titulos[nome] || "Character Codex";
+    }
 
+
+    // CARREGAR FICHA
 
     if (nome === "ficha") {
         renderFicha();
     }
 
+
+    // CARREGAR INVENTÁRIO
+
     if (nome === "inventario") {
         atualizarInventario();
     }
+
+
+    // CARREGAR GALERIA
+
+    if (nome === "galeria") {
+        if (typeof renderGaleria === "function") {
+            renderGaleria();
+        }
+    }
+
+
+    // CARREGAR CRONOLOGIA
+
+    if (nome === "cronologia") {
+        if (typeof carregarCronologia === "function") {
+            carregarCronologia();
+        }
+    }
 }
 
+
+// ==========================================
+// EVENTOS DE NAVEGAÇÃO
+// ==========================================
 
 document.querySelectorAll(".nav-link").forEach(b => {
     b.onclick = () => irPagina(b.dataset.page);
@@ -609,172 +556,108 @@ document.querySelectorAll("[data-goto]").forEach(b => {
 
 
 // ==========================================
-// EXPORTAÇÃO DO INVENTÁRIO PARA PDF
-// ==========================================
-
-function montarInventarioPDF() {
-
-    const container = $("print-inventory-content");
-
-    if (!container) {
-        console.warn(
-            "Elemento print-inventory-content não encontrado no HTML."
-        );
-        return;
-    }
-
-    const rows = personagem.inventario.map(i => `
-        <tr>
-            <td>${i.nome}</td>
-            <td>${i.quantidade}</td>
-            <td>${Number(i.peso).toFixed(1)} kg</td>
-            <td>${i.descricao}</td>
-        </tr>
-    `).join("");
-
-
-    const peso = personagem.inventario.reduce(
-        (s, i) => s + i.peso * i.quantidade,
-        0
-    );
-
-
-    container.innerHTML = `
-        <table>
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Qtd.</th>
-                    <th>Peso/un.</th>
-                    <th>Descrição</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                ${rows}
-            </tbody>
-        </table>
-
-        <p>
-            <strong>Capacidade:</strong>
-            ${personagem.atributos.FOR * 5} kg
-
-            ·
-
-            <strong>Peso cadastrado:</strong>
-            ${peso.toFixed(1)} kg
-        </p>
-    `;
-}
-
-
-// ==========================================
-// BOTÃO DE PDF
-// ==========================================
-
-$("print-sheet").onclick = () => {
-
-    renderFicha();
-
-    montarInventarioPDF();
-
-    document.body.classList.add("printing-codex");
-
-    window.print();
-};
-
-
-window.addEventListener("afterprint", () => {
-    document.body.classList.remove("printing-codex");
-});
-
-
-// ==========================================
 // EXPORTAR BACKUP JSON
 // ==========================================
 
-$("export-json").onclick = () => {
+if ($("export-json")) {
+    $("export-json").onclick = () => {
 
-    const blob = new Blob(
-        [JSON.stringify(personagem, null, 2)],
-        { type: "application/json" }
-    );
+        const blob = new Blob(
+            [JSON.stringify(personagem, null, 2)],
+            { type: "application/json" }
+        );
 
-    const a = document.createElement("a");
+        const a = document.createElement("a");
 
-    a.href = URL.createObjectURL(blob);
+        a.href = URL.createObjectURL(blob);
 
-    a.download = "vaerik-vharzeth-backup.json";
+        a.download = "vaerik-vharzeth-backup.json";
 
-    a.click();
+        a.click();
 
-    URL.revokeObjectURL(a.href);
-};
+        URL.revokeObjectURL(a.href);
+    };
+}
 
 
 // ==========================================
 // IMPORTAR BACKUP JSON
 // ==========================================
 
-$("import-json").onchange = async e => {
+if ($("import-json")) {
+    $("import-json").onchange = async e => {
 
-    const f = e.target.files[0];
+        const f = e.target.files[0];
 
-    if (!f) return;
+        if (!f) return;
 
-    try {
+        try {
 
-        personagem = JSON.parse(await f.text());
+            const dadosImportados = JSON.parse(await f.text());
 
-        salvar();
+            if (
+                !dadosImportados.atributos ||
+                !dadosImportados.recursos ||
+                !Array.isArray(dadosImportados.pericias) ||
+                !Array.isArray(dadosImportados.inventario)
+            ) {
+                throw new Error("Estrutura de personagem inválida.");
+            }
 
-        renderFicha();
+            personagem = dadosImportados;
 
-        renderTokens();
+            salvar();
 
-        aviso("Backup importado.");
+            renderFicha();
 
-    } catch (err) {
+            aviso("Backup importado.");
 
-        aviso("Arquivo JSON inválido.");
+        } catch (err) {
 
-    }
+            console.error(err);
 
-    e.target.value = "";
-};
+            aviso("Arquivo JSON inválido.");
+
+        }
+
+        e.target.value = "";
+    };
+}
 
 
 // ==========================================
 // ADICIONAR ITEM AO INVENTÁRIO
 // ==========================================
 
-$("add-item").onclick = () => {
+if ($("add-item")) {
+    $("add-item").onclick = () => {
 
-    const nome = prompt("Nome do item:");
+        const nome = prompt("Nome do item:");
 
-    if (!nome) return;
+        if (!nome) return;
 
-    const quantidade =
-        Number(prompt("Quantidade:", "1")) || 1;
+        const quantidade =
+            Number(prompt("Quantidade:", "1")) || 1;
 
-    const peso =
-        Number(prompt("Peso por unidade em kg:", "0")) || 0;
+        const peso =
+            Number(prompt("Peso por unidade em kg:", "0")) || 0;
 
-    const descricao =
-        prompt("Descrição:") || "Item";
+        const descricao =
+            prompt("Descrição:") || "Item";
 
 
-    personagem.inventario.push({
-        nome,
-        quantidade,
-        peso,
-        descricao
-    });
+        personagem.inventario.push({
+            nome,
+            quantidade,
+            peso,
+            descricao
+        });
 
-    salvar();
+        salvar();
 
-    aviso("Item adicionado.");
-};
+        aviso("Item adicionado.");
+    };
+}
 
 
 // ==========================================
@@ -793,7 +676,17 @@ if ($("journal")) {
 
     });
 }
+// ==========================================
+// BOTÃO DE EXPORTAR PDF
+// ==========================================
 
+const botaoPDF = document.getElementById("print-sheet");
+
+if (botaoPDF) {
+    botaoPDF.addEventListener("click", function () {
+        PDFCodex.abrirSeletor();
+    });
+}
 
 // ==========================================
 // INICIALIZAÇÃO
@@ -802,7 +695,5 @@ if ($("journal")) {
 atualizarDashboard();
 
 atualizarInventario();
-
-renderTokens();
 
 carregarArquivoPessoal();

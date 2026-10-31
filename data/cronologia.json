@@ -1,0 +1,228 @@
+{
+  "personagem": "Vaerik Vharzeth",
+  "anoAtual": "1000 D.A.",
+  "capitulos": [
+    {
+      "id": "antes",
+      "titulo": "Antes das Cinzas",
+      "periodo": "872–890 D.A.",
+      "descricao": "Os primeiros dezoito anos de Vaerik, antes do selamento.",
+      "eventos": [
+        {
+          "ano": "872 D.A.",
+          "idade": "0 anos",
+          "titulo": "Nascimento de Vaerik",
+          "descricao": "Vaerik Vharzeth nasce em Khar-Vhar, pertencente ao Clã Vharzeth. Filho de Tharion e Neryssa.",
+          "local": "Khar-Vhar",
+          "tipo": "marco",
+          "imagem": ""
+        },
+        {
+          "ano": "873–877 D.A.",
+          "idade": "1–5 anos",
+          "titulo": "Primeiros anos",
+          "descricao": "Vaerik cresce em uma família relativamente comum, sem uma posição declaradamente alinhada às disputas políticas e ideológicas.",
+          "local": "Khar-Vhar",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "878–882 D.A.",
+          "idade": "6–10 anos",
+          "titulo": "Infância no clã",
+          "descricao": "Durante sua infância, desenvolve sua própria visão sobre liberdade e independência. Ainda não possui uma ligação direta com as grandes facções.",
+          "local": "Khar-Vhar",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "883–885 D.A.",
+          "idade": "11–13 anos",
+          "titulo": "O desejo de liberdade",
+          "descricao": "Começa a desenvolver sua ambição central: ter controle sobre o próprio destino e jamais precisar se subordinar a alguém.",
+          "local": "Khar-Vhar",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "886 D.A.",
+          "idade": "14 anos",
+          "titulo": "Observador",
+          "descricao": "Passa a observar mais atentamente as disputas de poder e as estruturas de influência ao seu redor.",
+          "local": "Khar-Vhar",
+          "tipo": "marco",
+          "imagem": ""
+        },
+        {
+          "ano": "887 D.A.",
+          "idade": "15 anos",
+          "titulo": "Assembleia das Brasas",
+          "descricao": "Aproxima-se da Assembleia das Brasas. Enxerga nela uma oportunidade de construir influência e poder sem precisar se tornar subordinado.",
+          "local": "Khar-Vhar",
+          "tipo": "marco",
+          "imagem": ""
+        },
+        {
+          "ano": "888 D.A.",
+          "idade": "16 anos",
+          "titulo": "O início da manipulação",
+          "descricao": "Começa a utilizar manipulação social de maneira mais deliberada. Trabalha com verdades, omissões e mentiras para influenciar pessoas. Seu primeiro grande risco é vazar uma informação que somente ele conhecia. Tharion e Neryssa percebem algo estranho, mas Vaerik consegue convencê-los.",
+          "local": "Khar-Vhar",
+          "tipo": "marco",
+          "imagem": ""
+        },
+        {
+          "ano": "889 D.A.",
+          "idade": "17 anos",
+          "titulo": "A Serpente Verde",
+          "descricao": "Aproxima-se dos druidas e do Círculo da Serpente Verde. Passa a atuar entre os dois lados, construindo uma posição que lhe permite manipular os acontecimentos. Começa a conspiração que envolve a Assembleia e a traição dos druidas.",
+          "local": "Khar-Vhar",
+          "tipo": "marco",
+          "imagem": ""
+        },
+        {
+          "ano": "890 D.A.",
+          "idade": "18 anos",
+          "titulo": "A Noite do Céu Partido",
+          "descricao": "Vaerik sacrifica os interesses da própria Assembleia e utiliza a Doutrina da Cinza para provocar a guerra. Participa da conspiração que usa a traição druídica como isca, sabota tentativas de paz e contribui para os ataques. Rompe definitivamente com seus pais. Em desespero para manter o controle da situação, ativa o Coração do Ocaso e acaba sendo selado por uma druida.",
+          "local": "Khar-Vhar",
+          "tipo": "importante",
+          "imagem": ""
+        }
+      ]
+    },
+    {
+      "id": "silencio",
+      "titulo": "Um Século de Silêncio",
+      "periodo": "890–990 D.A.",
+      "descricao": "Cem anos de aprisionamento, enquanto o mundo continua sem Vaerik.",
+      "eventos": [
+        {
+          "ano": "890 D.A.",
+          "idade": "18 anos",
+          "titulo": "O selamento",
+          "descricao": "Após os acontecimentos da Noite do Céu Partido, Vaerik é selado por uma druida.",
+          "local": "Caverna do selamento",
+          "tipo": "importante",
+          "imagem": ""
+        },
+        {
+          "ano": "891–989 D.A.",
+          "idade": "19–117 anos",
+          "titulo": "Um século de silêncio",
+          "descricao": "Vaerik permanece preso durante décadas, sem participar dos acontecimentos do mundo exterior.",
+          "local": "Caverna do selamento",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "990 D.A.",
+          "idade": "118 anos",
+          "titulo": "O despertar",
+          "descricao": "Uma explosão leva Thalen até a caverna onde Vaerik está preso. O meio-elfo, então com 8 anos, encontra Vaerik debilitado, faminto e desidratado.",
+          "local": "Caverna do selamento",
+          "tipo": "importante",
+          "imagem": ""
+        }
+      ]
+    },
+    {
+      "id": "despertar",
+      "titulo": "O Mundo Após o Despertar",
+      "periodo": "990–1000 D.A.",
+      "descricao": "De volta ao mundo, Vaerik começa uma nova jornada ao lado de Thalen.",
+      "eventos": [
+        {
+          "ano": "991 D.A.",
+          "idade": "119 anos",
+          "titulo": "A recuperação continua",
+          "descricao": "Vaerik continua em recuperação, dependendo dos cuidados de Thalen.",
+          "local": "Região da caverna",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "992 D.A.",
+          "idade": "120 anos",
+          "titulo": "Primeiros passos",
+          "descricao": "Continua debilitado e passa a depender cada vez menos da ajuda de Thalen.",
+          "local": "Região da caverna",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "993 D.A.",
+          "idade": "121 anos",
+          "titulo": "Recuperando a autonomia",
+          "descricao": "Sua recuperação avança gradualmente. Vaerik começa a recuperar sua autonomia.",
+          "local": "Região da caverna",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "994 D.A.",
+          "idade": "122 anos",
+          "titulo": "O fim da recuperação",
+          "descricao": "Aproxima-se do fim do período de recuperação, ainda vivendo na região da caverna.",
+          "local": "Região da caverna",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "995 D.A.",
+          "idade": "123 anos",
+          "titulo": "As primeiras viagens",
+          "descricao": "Após cinco anos de cuidados, Vaerik começa a viajar com Thalen.",
+          "local": "Estradas",
+          "tipo": "marco",
+          "imagem": ""
+        },
+        {
+          "ano": "996 D.A.",
+          "idade": "124 anos",
+          "titulo": "Pelas estradas",
+          "descricao": "Os dois seguem pelas estradas, sobrevivendo e evitando chamar atenção.",
+          "local": "Estradas",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "997 D.A.",
+          "idade": "125 anos",
+          "titulo": "Alvos escolhidos",
+          "descricao": "Continuam viajando e roubando exclusivamente caravanas de comerciantes ricos.",
+          "local": "Estradas",
+          "tipo": "marco",
+          "imagem": ""
+        },
+        {
+          "ano": "998 D.A.",
+          "idade": "126 anos",
+          "titulo": "Uma dupla experiente",
+          "descricao": "Aprimoram suas estratégias de sobrevivência e passam a agir em conjunto.",
+          "local": "Estradas",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "999 D.A.",
+          "idade": "127 anos",
+          "titulo": "Passados discretos",
+          "descricao": "Continuam sua jornada, mantendo suas identidades e passados discretos perante desconhecidos.",
+          "local": "Estradas",
+          "tipo": "periodo",
+          "imagem": ""
+        },
+        {
+          "ano": "1000 D.A.",
+          "idade": "128 anos",
+          "titulo": "O presente",
+          "descricao": "Ano atual da campanha. Vaerik possui 128 anos cronológicos, dos quais 100 foram passados sob o selo. Sua aparência física permanece a de um jovem de 18 anos.",
+          "local": "Valedouro, Alyndor",
+          "tipo": "importante",
+          "imagem": ""
+        }
+      ]
+    }
+  ]
+}

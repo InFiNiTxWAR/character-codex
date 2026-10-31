@@ -1,954 +1,1503 @@
 
+// ==========================================
+// CHARACTER CODEX — SISTEMA DE EXPORTAÇÃO PDF
+// Personagem: Vaerik Vharzeth
+// ==========================================
+
 const PDFCodex = {
+
+    nomeArquivo: "Vaerik_Vharzeth",
+
     cores: {
-        vinho: "#8B414D",
-        escuro: "#29232B",
-        cinza: "#777078",
-        claro: "#F5F1ED",
-        linha: "#DED7D1"
+        fundo: "#171717",
+        dourado: "#A4865D",
+        texto: "#333333",
+        cinza: "#777777",
+        claro: "#EEEEEE"
     },
 
-    nomesAtributos: {
-        FOR: "Força",
-        AGI: "Agilidade",
-        CON: "Constituição",
-        INT: "Intelecto",
-        CAR: "Carisma"
+
+    // ==========================================
+    // FORMATAÇÃO
+    // ==========================================
+
+    texto(valor, padrao = "Não informado") {
+
+        if (valor === undefined || valor === null || valor === "") {
+            return padrao;
+        }
+
+        return String(valor);
     },
+
 
     titulo(texto) {
+
         return {
             text: texto.toUpperCase(),
-            style: "secao",
-            margin: [0, 15, 0, 8],
-            keepWithNext: true
+            fontSize: 14,
+            bold: true,
+            color: this.cores.dourado,
+            margin: [0, 20, 0, 10]
         };
     },
 
-    tabela(colunas, linhas, larguras) {
+
+    linha() {
+
         return {
-            table: {
-                headerRows: 1,
-                dontBreakRows: true,
-                widths: larguras || colunas.map(() => "*"),
-                body: [
-                    colunas.map(texto => ({
-                        text: texto,
-                        style: "cabecalho"
-                    })),
-                    ...linhas.map(linha =>
-                        linha.map(valor => ({
-                            text: String(valor ?? "—"),
-                            style: "celula"
-                        }))
-                    )
-                ]
+            canvas: [{
+                type: "line",
+                x1: 0,
+                y1: 0,
+                x2: 515,
+                y2: 0,
+                lineWidth: 1,
+                lineColor: "#D0C4B0"
+            }],
+            margin: [0, 5, 0, 10]
+        };
+    },
+
+
+    // ==========================================
+    // CAPA
+    // ==========================================
+
+    criarCapa(p) {
+
+        return [
+
+            { text: "\n\n\n\n\n" },
+
+            {
+                text: "CHARACTER CODEX",
+                alignment: "center",
+                fontSize: 16,
+                bold: true,
+                color: this.cores.dourado,
+                characterSpacing: 4
             },
-            layout: {
-                hLineColor: () => this.cores.linha,
-                vLineColor: () => this.cores.linha,
-                fillColor: linha =>
-                    linha === 0
-                        ? this.cores.escuro
-                        : linha % 2 === 0
-                            ? "#F8F5F2"
-                            : null,
-                paddingLeft: () => 6,
-                paddingRight: () => 6,
-                paddingTop: () => 5,
-                paddingBottom: () => 5
-            }
-        };
-    },
 
-    tabelaInformacoes(linhas) {
-        return {
-            table: {
-                widths: ["35%", "*"],
-                body: linhas.map(linha => [
-                    {
-                        text: linha[0],
-                        style: "rotulo"
-                    },
-                    {
-                        text: String(linha[1] ?? "—"),
-                        style: "valor"
-                    }
-                ])
+            { text: "\n" },
+
+            {
+                text: this.texto(p.nome),
+                alignment: "center",
+                fontSize: 30,
+                bold: true,
+                color: "#222222",
+                margin: [0, 20, 0, 5]
             },
-            layout: {
-                hLineColor: () => this.cores.linha,
-                vLineColor: () => this.cores.linha,
-                paddingLeft: () => 8,
-                paddingRight: () => 8,
-                paddingTop: () => 5,
-                paddingBottom: () => 5
-            }
-        };
-    },
 
-    estilos() {
-        return {
-            marca: {
+            {
+                text: this.texto(p.apelido, ""),
+                alignment: "center",
+                fontSize: 15,
+                italics: true,
+                color: this.cores.cinza
+            },
+
+            { text: "\n\n" },
+
+            {
+                text: `${this.texto(p.raca)} • ${this.texto(p.classe)} • Nível ${this.texto(p.nivel, "1")}`,
+                alignment: "center",
+                fontSize: 12,
+                color: this.cores.texto
+            },
+
+            { text: "\n\n\n\n\n\n" },
+
+            {
+                text: "GUARDIÕES DO DESTINO",
+                alignment: "center",
                 fontSize: 11,
                 bold: true,
-                color: this.cores.vinho,
-                characterSpacing: 4,
-                alignment: "center"
-            },
-
-            capaTitulo: {
-                fontSize: 34,
-                bold: true,
-                color: this.cores.escuro,
-                alignment: "center",
-                margin: [0, 20, 0, 10]
-            },
-
-            capaApelido: {
-                fontSize: 13,
-                color: this.cores.vinho,
-                alignment: "center",
-                characterSpacing: 3
-            },
-
-            capaDetalhe: {
-                fontSize: 10,
-                alignment: "center",
-                color: this.cores.cinza,
-                margin: [0, 10, 0, 0]
-            },
-
-            capaRodape: {
-                fontSize: 9,
-                alignment: "center",
-                color: this.cores.cinza,
+                color: this.cores.dourado,
                 characterSpacing: 2
             },
 
-            numeroCapitulo: {
+            {
+                text: "ARQUIVO DE PERSONAGEM",
+                alignment: "center",
                 fontSize: 9,
-                bold: true,
-                color: this.cores.vinho,
-                characterSpacing: 3
+                color: this.cores.cinza,
+                margin: [0, 5, 0, 0]
             },
 
-            tituloPagina: {
-                fontSize: 25,
-                bold: true,
-                color: this.cores.escuro,
-                margin: [0, 5, 0, 12]
-            },
+            { text: "\n\n\n\n" },
 
-            secao: {
-                fontSize: 11,
-                bold: true,
-                color: this.cores.vinho,
-                characterSpacing: 1
-            },
-
-            rotulo: {
+            {
+                text: "Documento gerado pelo Character Codex",
+                alignment: "center",
                 fontSize: 8,
                 color: this.cores.cinza
             },
 
-            valor: {
-                fontSize: 8,
-                bold: true,
-                color: this.cores.escuro
-            },
-
-            cabecalho: {
-                fontSize: 7.5,
-                bold: true,
-                color: "#FFFFFF"
-            },
-
-            celula: {
-                fontSize: 7.5,
-                color: this.cores.escuro
-            },
-
-            habilidadeTitulo: {
-                fontSize: 11,
-                bold: true,
-                color: this.cores.escuro
-            },
-
-            texto: {
-                fontSize: 9,
-                color: this.cores.escuro,
-                lineHeight: 1.4
-            },
-
-            observacao: {
-                fontSize: 8,
-                color: this.cores.cinza,
-                italics: true
-            },
-
-            loreTitulo: {
-                fontSize: 15,
-                bold: true,
-                color: this.cores.vinho,
-                margin: [0, 12, 0, 8],
-                keepWithNext: true
-            }
-        };
-    },
-
-    criarCapa(p, completo) {
-        return [
-            {
-                text: "CHARACTER CODEX",
-                style: "marca",
-                margin: [0, 85, 0, 35]
-            },
-            {
-                text: "REGISTRO DE PERSONAGEM",
-                style: "observacao",
-                alignment: "center"
-            },
-            {
-                text: (p.nome || "Personagem").toUpperCase(),
-                style: "capaTitulo"
-            },
-            {
-                text: p.apelido || "",
-                style: "capaApelido"
-            },
-            {
-                canvas: [{
-                    type: "line",
-                    x1: 0,
-                    y1: 0,
-                    x2: 220,
-                    y2: 0,
-                    lineWidth: 2,
-                    lineColor: this.cores.vinho
-                }],
-                alignment: "center",
-                margin: [0, 25, 0, 25]
-            },
-            {
-                text: "GUARDIÕES DO DESTINO",
-                bold: true,
-                fontSize: 12,
-                alignment: "center"
-            },
-            {
-                text: `${p.raca} • ${p.classe} • Nível ${p.nivel}`,
-                style: "capaDetalhe"
-            },
-            {
-                text: completo ? "ARQUIVO COMPLETO" : "DOCUMENTO TÉCNICO",
-                style: "capaRodape",
-                margin: [0, 120, 0, 0]
-            },
-            {
-                text: "CHARACTER CODEX / ARQUIVO PESSOAL",
-                style: "observacao",
-                alignment: "center",
-                margin: [0, 10, 0, 0]
-            },
             {
                 text: "",
                 pageBreak: "after"
             }
+
         ];
     },
 
+
+    // ==========================================
+    // VISÃO GERAL
+    // ==========================================
+
     criarVisaoGeral(p) {
-        const r = p.recursos;
-        const a = p.atributos;
 
         return [
-            { text: "01", style: "numeroCapitulo" },
-            { text: "Visão geral", style: "tituloPagina" },
 
             this.titulo("Identificação"),
 
-            this.tabelaInformacoes([
-                ["Nome completo", p.nome],
-                ["Apelido", p.apelido],
-                ["Raça", p.raca],
-                ["Classe", p.classe],
-                ["Nível", p.nivel],
-                ["Experiência", p.experiencia],
-                ["Origem", p.origem],
-                ["Local atual", p.local],
-                ["Idade aparente", p.idade],
-                ["Altura", p.altura]
-            ]),
-
-            this.titulo("Recursos atuais"),
-
-            this.tabela(
-                ["Recurso", "Atual", "Máximo"],
-                [
-                    ["Pontos de Vida", r.pv, r.pvMax],
-                    ["Pontos de Mana", r.pm, r.pmMax],
-                    ["Sanidade", r.sanidade, r.sanidadeMax],
-                    ["Pontos do Destino", r.destino, "—"]
-                ],
-                ["*", "25%", "25%"]
-            ),
-
-            this.titulo("Resumo dos atributos"),
-
-            this.tabela(
-                ["Atributo", "Pontos", "Valor base"],
-                Object.entries(a).map(([sigla, valor]) => [
-                    this.nomesAtributos[sigla] || sigla,
-                    valor,
-                    `${valor * 4}%`
-                ]),
-                ["*", "25%", "30%"]
-            ),
-
             {
-                text: "Os valores refletem o estado da ficha no momento da exportação.",
-                style: "observacao",
-                margin: [0, 10, 0, 0]
-            }
-        ];
-    },
-
-    criarFichaTecnica(p) {
-        const atributos = p.atributos;
-
-        const pericias = p.pericias.map(pericia => {
-            const [nome, atributo, pontos] = pericia;
-
-            const chave = atributo === "CAR/CON"
-                ? "CAR"
-                : atributo;
-
-            const chance =
-                (atributos[chave] || 0) * 4 +
-                pontos * 3;
-
-            return [
-                nome,
-                atributo,
-                pontos,
-                `${chance}%`
-            ];
-        });
-
-        const pontosDistribuidos = p.pericias.reduce(
-            (total, pericia) => total + Number(pericia[2] || 0),
-            0
-        );
-
-        const habilidades = [];
-
-        p.habilidades.forEach(h => {
-            habilidades.push(
-                {
-                    text: h.nome,
-                    style: "habilidadeTitulo",
-                    margin: [0, 10, 0, 3],
-                    keepWithNext: true
+                table: {
+                    widths: ["35%", "65%"],
+                    body: [
+                        ["Nome", this.texto(p.nome)],
+                        ["Apelido", this.texto(p.apelido)],
+                        ["Raça", this.texto(p.raca)],
+                        ["Classe", this.texto(p.classe)],
+                        ["Nível", this.texto(p.nivel)],
+                        ["Experiência", this.texto(p.experiencia, "0")],
+                        ["Origem", this.texto(p.origem)],
+                        ["Local de início", this.texto(p.local)],
+                        ["Idade", this.texto(p.idade)],
+                        ["Altura", this.texto(p.altura)]
+                    ]
                 },
-                {
-                    text: h.descricao,
-                    style: "texto"
-                },
-                {
-                    text: h.tipo,
-                    style: "observacao",
-                    margin: [0, 3, 0, 5]
-                }
-            );
-        });
-
-        return [
-            {
-                text: "02",
-                style: "numeroCapitulo",
-                pageBreak: "before"
-            },
-            {
-                text: "Ficha técnica",
-                style: "tituloPagina"
+                layout: "lightHorizontalLines",
+                fontSize: 10
             },
 
             this.titulo("Atributos"),
 
-            this.tabela(
-                ["Atributo", "Sigla", "Pontos", "Base"],
-                Object.entries(atributos).map(([sigla, valor]) => [
-                    this.nomesAtributos[sigla] || sigla,
-                    sigla,
-                    valor,
-                    `${valor * 4}%`
-                ]),
-                ["*", "15%", "20%", "25%"]
-            ),
-
-            this.titulo("Perícias"),
-
             {
-                text: `Pontos distribuídos: ${pontosDistribuidos} / 6`,
-                style: "observacao",
-                margin: [0, 0, 0, 8]
-            },
+                table: {
+                    widths: ["*", "*", "*", "*", "*"],
+                    body: [
 
-            this.tabela(
-                ["Perícia", "Atributo", "Pontos", "Chance"],
-                pericias,
-                ["*", "22%", "18%", "22%"]
-            ),
+                        [
+                            { text: "FOR", bold: true },
+                            { text: "AGI", bold: true },
+                            { text: "CON", bold: true },
+                            { text: "INT", bold: true },
+                            { text: "CAR", bold: true }
+                        ],
 
-            {
-                text: "02 — Combate e habilidades",
-                style: "numeroCapitulo",
-                pageBreak: "before",
-                margin: [0, 0, 0, 5]
-            },
+                        [
+                            this.texto(p.atributos?.FOR, "0"),
+                            this.texto(p.atributos?.AGI, "0"),
+                            this.texto(p.atributos?.CON, "0"),
+                            this.texto(p.atributos?.INT, "0"),
+                            this.texto(p.atributos?.CAR, "0")
+                        ]
 
-            {
-                text: "Combate e habilidades",
-                style: "tituloPagina"
-            },
-
-            this.titulo("Valores de combate"),
-
-            this.tabela(
-                ["Indicador", "Valor", "Observação"],
-                [
-                    ["Defesa passiva", "38%", "Valor de referência"],
-                    ["Defesa ativa", "19%", "Antes de modificadores"],
-                    [
-                        "Capacidade de carga",
-                        `${atributos.FOR * 5} kg`,
-                        "Força × 5"
                     ]
-                ],
-                ["*", "20%", "*"]
-            ),
+                },
+                alignment: "center",
+                layout: "lightHorizontalLines",
+                fontSize: 11
+            },
 
-            this.titulo("Habilidades especiais"),
+            this.titulo("Recursos"),
 
-            ...(habilidades.length
-                ? habilidades
-                : [{
-                    text: "Nenhuma habilidade cadastrada.",
-                    style: "texto"
-                }])
+            {
+                table: {
+                    widths: ["*", "*", "*", "*"],
+                    body: [
+
+                        [
+                            { text: "Pontos de Vida", bold: true },
+                            { text: "Pontos de Mana", bold: true },
+                            { text: "Sanidade", bold: true },
+                            { text: "Destino", bold: true }
+                        ],
+
+                        [
+                            `${this.texto(p.recursos?.pv, "0")} / ${this.texto(p.recursos?.pvMax, "0")}`,
+                            `${this.texto(p.recursos?.pm, "0")} / ${this.texto(p.recursos?.pmMax, "0")}`,
+                            `${this.texto(p.recursos?.sanidade, "0")} / ${this.texto(p.recursos?.sanidadeMax, "0")}`,
+                            this.texto(p.recursos?.destino, "0")
+                        ]
+
+                    ]
+                },
+                alignment: "center",
+                layout: "lightHorizontalLines",
+                fontSize: 9
+            }
+
         ];
     },
+
+
+    // ==========================================
+    // FICHA TÉCNICA
+    // ==========================================
+
+    criarFichaTecnica(p) {
+
+        const conteudo = [];
+
+        conteudo.push(this.titulo("Atributos"));
+
+        const atributos = p.atributos || {};
+
+        conteudo.push({
+
+            table: {
+                widths: ["*", "*", "*", "*", "*"],
+                body: [
+
+                    [
+                        "Força",
+                        "Agilidade",
+                        "Constituição",
+                        "Intelecto",
+                        "Carisma"
+                    ],
+
+                    [
+                        this.texto(atributos.FOR, "0"),
+                        this.texto(atributos.AGI, "0"),
+                        this.texto(atributos.CON, "0"),
+                        this.texto(atributos.INT, "0"),
+                        this.texto(atributos.CAR, "0")
+                    ]
+
+                ]
+            },
+
+            alignment: "center",
+            layout: "lightHorizontalLines",
+            fontSize: 9
+
+        });
+
+
+        // VALORES DE COMBATE
+
+        conteudo.push(this.titulo("Valores de combate"));
+
+        conteudo.push({
+
+            table: {
+                widths: ["35%", "20%", "45%"],
+                body: [
+
+                    [
+                        { text: "Característica", bold: true },
+                        { text: "Valor", bold: true },
+                        { text: "Descrição", bold: true }
+                    ],
+
+                    [
+                        "Pontos de Vida",
+                        `${this.texto(p.recursos?.pv, "0")} / ${this.texto(p.recursos?.pvMax, "0")}`,
+                        "Capacidade de resistência do personagem."
+                    ],
+
+                    [
+                        "Pontos de Mana",
+                        `${this.texto(p.recursos?.pm, "0")} / ${this.texto(p.recursos?.pmMax, "0")}`,
+                        "Recurso utilizado para habilidades e poderes."
+                    ],
+
+                    [
+                        "Sanidade",
+                        `${this.texto(p.recursos?.sanidade, "0")} / ${this.texto(p.recursos?.sanidadeMax, "0")}`,
+                        "Representa a estabilidade mental."
+                    ],
+
+                    [
+                        "Pontos de Destino",
+                        this.texto(p.recursos?.destino, "0"),
+                        "Recurso especial do personagem."
+                    ],
+
+                    [
+                        "Astúcia — Talento inicial",
+                        "+10%",
+                        "Bônus em Enganação, Manipulação e truques sociais."
+                    ]
+
+                ]
+            },
+
+            layout: "lightHorizontalLines",
+            fontSize: 9
+
+        });
+
+
+        // PERÍCIAS
+
+        conteudo.push(this.titulo("Perícias"));
+
+        if (p.pericias && p.pericias.length > 0) {
+
+            const linhas = [
+
+                [
+                    { text: "Perícia", bold: true },
+                    { text: "Atributo", bold: true },
+                    { text: "Pontos", bold: true }
+                ]
+
+            ];
+
+            p.pericias.forEach(pericia => {
+
+                linhas.push([
+
+                    this.texto(pericia[0]),
+                    this.texto(pericia[1]),
+                    this.texto(pericia[2], "0")
+
+                ]);
+
+            });
+
+            conteudo.push({
+
+                table: {
+                    widths: ["50%", "25%", "25%"],
+                    body: linhas
+                },
+
+                layout: "lightHorizontalLines",
+                fontSize: 9
+
+            });
+
+        } else {
+
+            conteudo.push({
+
+                text: "Nenhuma perícia cadastrada.",
+                color: this.cores.cinza,
+                fontSize: 9
+
+            });
+
+        }
+
+
+        // HABILIDADES
+
+        conteudo.push(this.titulo("Habilidades"));
+
+        if (p.habilidades && p.habilidades.length > 0) {
+
+            p.habilidades.forEach(habilidade => {
+
+                conteudo.push({
+
+                    stack: [
+
+                        {
+                            text: this.texto(habilidade.nome),
+                            bold: true,
+                            color: this.cores.dourado,
+                            fontSize: 10
+                        },
+
+                        {
+                            text: this.texto(habilidade.tipo, ""),
+                            italics: true,
+                            color: this.cores.cinza,
+                            fontSize: 8
+                        },
+
+                        {
+                            text: this.texto(habilidade.descricao),
+                            fontSize: 9,
+                            margin: [0, 3, 0, 8]
+                        }
+
+                    ]
+
+                });
+
+            });
+
+        } else {
+
+            conteudo.push({
+
+                text: "Nenhuma habilidade cadastrada.",
+                color: this.cores.cinza,
+                fontSize: 9
+
+            });
+
+        }
+
+        return conteudo;
+    },
+
+
+    // ==========================================
+    // INVENTÁRIO
+    // ==========================================
 
     criarInventario(p) {
-        const itens = p.inventario || [];
 
-        const pesoTotal = itens.reduce(
-            (total, item) =>
-                total +
-                Number(item.peso || 0) *
-                Number(item.quantidade || 0),
-            0
-        );
+        const conteudo = [];
 
-        const capacidade = p.atributos.FOR * 5;
+        conteudo.push(this.titulo("Inventário"));
 
-        const linhas = itens.map(item => [
-            item.nome,
-            item.quantidade,
-            `${Number(item.peso || 0).toFixed(1)} kg`,
-            `${(
-                Number(item.peso || 0) *
-                Number(item.quantidade || 0)
-            ).toFixed(1)} kg`,
-            item.descricao || "—"
-        ]);
+        if (!p.inventario || p.inventario.length === 0) {
 
-        return [
-            {
-                text: "03",
-                style: "numeroCapitulo",
-                pageBreak: "before"
-            },
-            {
-                text: "Inventário",
-                style: "tituloPagina"
-            },
-
-            this.titulo("Capacidade de carga"),
-
-            this.tabela(
-                ["Capacidade", "Peso carregado", "Disponível"],
-                [[
-                    `${capacidade} kg`,
-                    `${pesoTotal.toFixed(1)} kg`,
-                    `${(capacidade - pesoTotal).toFixed(1)} kg`
-                ]],
-                ["*", "*", "*"]
-            ),
-
-            this.titulo("Equipamentos e objetos"),
-
-            ...(itens.length
-                ? [
-                    this.tabela(
-                        ["Item", "Qtd.", "Peso/un.", "Peso total", "Descrição"],
-                        linhas,
-                        ["*", "9%", "15%", "17%", "*"]
-                    )
-                ]
-                : [{
-                    text: "Nenhum item cadastrado.",
-                    style: "texto"
-                }]),
-
-            {
-                text: "Os pesos e quantidades refletem os dados cadastrados na ficha.",
-                style: "observacao",
-                margin: [0, 12, 0, 0]
-            }
-        ];
-    },
-
-    criarLore(lore) {
-        const conteudo = [
-            {
-                text: "04",
-                style: "numeroCapitulo",
-                pageBreak: "before"
-            },
-            {
-                text: lore.titulo || "História do personagem",
-                style: "tituloPagina"
-            }
-        ];
-
-        if (lore.subtitulo) {
             conteudo.push({
-                text: lore.subtitulo,
-                style: "observacao",
-                margin: [0, 0, 0, 15]
+
+                text: "Nenhum item cadastrado.",
+                color: this.cores.cinza
+
             });
+
+            return conteudo;
         }
 
-        (lore.capitulos || []).forEach(capitulo => {
-            conteudo.push({
-                text: capitulo.titulo,
-                style: "loreTitulo"
-            });
+        const linhas = [
 
-            (capitulo.conteudo || []).forEach(paragrafo => {
-                conteudo.push({
-                    text: paragrafo,
-                    style: "texto",
-                    margin: [0, 0, 0, 9]
-                });
-            });
+            [
+                { text: "Item", bold: true },
+                { text: "Quantidade", bold: true },
+                { text: "Peso", bold: true },
+                { text: "Descrição", bold: true }
+            ]
+
+        ];
+
+        p.inventario.forEach(item => {
+
+            linhas.push([
+
+                this.texto(item.nome),
+                this.texto(item.quantidade, "1"),
+                this.texto(item.peso, "0"),
+                this.texto(item.descricao, "")
+
+            ]);
+
+        });
+
+        conteudo.push({
+
+            table: {
+                headerRows: 1,
+                widths: ["25%", "15%", "15%", "45%"],
+                body: linhas
+            },
+
+            layout: "lightHorizontalLines",
+            fontSize: 8
+
         });
 
         return conteudo;
     },
+
+
+    // ==========================================
+    // LORE — FORMATAÇÃO NARRATIVA
+    // ==========================================
+
+    criarLore(dados) {
+
+        const conteudo = [];
+
+        // TÍTULO DA SEÇÃO
+
+        conteudo.push({
+
+            text: "O LEGADO DAS CINZAS",
+            fontSize: 23,
+            bold: true,
+            color: this.cores.dourado,
+            alignment: "center",
+            characterSpacing: 1.5,
+            margin: [0, 25, 0, 10]
+
+        });
+
+
+        // VERIFICA SE EXISTE LORE
+
+        if (!dados) {
+
+            conteudo.push({
+
+                text: "Nenhuma informação de lore encontrada.",
+                color: this.cores.cinza
+
+            });
+
+            return conteudo;
+        }
+
+
+        // ------------------------------------------
+        // FUNÇÃO PARA FORMATAR PARÁGRAFOS
+        // ------------------------------------------
+
+        const formatarParagrafos = (texto) => {
+
+            if (texto === undefined || texto === null || texto === "") {
+                return [];
+            }
+
+            let paragrafos = [];
+
+            if (Array.isArray(texto)) {
+
+                paragrafos = texto;
+
+            } else {
+
+                paragrafos = String(texto)
+                    .replace(/\r\n/g, "\n")
+                    .split(/\n\s*\n|\n/)
+                    .map(paragrafo => paragrafo.trim());
+
+            }
+
+            return paragrafos
+
+                .filter(paragrafo => {
+
+                    return paragrafo !== "" &&
+                        paragrafo !== null &&
+                        paragrafo !== undefined;
+
+                })
+
+                .map(paragrafo => ({
+
+                    text: String(paragrafo).trim(),
+                    fontSize: 9.5,
+                    color: this.cores.texto,
+                    alignment: "justify",
+                    lineHeight: 1.45,
+                    margin: [0, 0, 0, 10]
+
+                }));
+
+        };
+
+
+        // ------------------------------------------
+        // FUNÇÃO PARA EXTRAIR O TEXTO DO CAPÍTULO
+        // ------------------------------------------
+
+        const obterTexto = (item) => {
+
+            if (typeof item === "string") {
+                return item;
+            }
+
+            if (Array.isArray(item)) {
+                return item;
+            }
+
+            if (!item || typeof item !== "object") {
+                return "";
+            }
+
+            return item.paragrafos
+                || item.conteudo
+                || item.descricao
+                || item.texto
+                || item.corpo
+                || "";
+
+        };
+
+
+        // ------------------------------------------
+        // TÍTULO E SUBTÍTULO
+        // ------------------------------------------
+
+        if (dados.titulo) {
+
+            conteudo[0].text = String(dados.titulo).toUpperCase();
+
+        }
+
+        conteudo.push({
+
+            canvas: [{
+                type: "line",
+                x1: 100,
+                y1: 0,
+                x2: 375,
+                y2: 0,
+                lineWidth: 1.5,
+                lineColor: this.cores.dourado
+            }],
+
+            margin: [0, 5, 0, 18]
+
+        });
+
+
+        if (dados.subtitulo) {
+
+            conteudo.push({
+
+                text: dados.subtitulo,
+                fontSize: 10,
+                italics: true,
+                color: this.cores.cinza,
+                alignment: "center",
+                lineHeight: 1.4,
+                margin: [15, 0, 15, 25]
+
+            });
+
+        }
+
+
+        // ------------------------------------------
+        // ESTRUTURA EM LISTA
+        // ------------------------------------------
+
+        if (Array.isArray(dados)) {
+
+            dados.forEach((item, indice) => {
+
+                const titulo = typeof item === "object" && item !== null
+                    ? item.titulo || item.nome || `Capítulo ${indice + 1}`
+                    : `Capítulo ${indice + 1}`;
+
+                conteudo.push({
+
+                    text: titulo,
+                    fontSize: 14,
+                    bold: true,
+                    color: this.cores.dourado,
+                    margin: [0, 22, 0, 10],
+                    keepWithNext: true
+
+                });
+
+                conteudo.push(...formatarParagrafos(obterTexto(item)));
+
+            });
+
+            return conteudo;
+        }
+
+
+        // ------------------------------------------
+        // CAPÍTULOS
+        // ------------------------------------------
+
+        if (Array.isArray(dados.capitulos)) {
+
+            dados.capitulos.forEach((capitulo, indice) => {
+
+                const titulo = typeof capitulo === "object" && capitulo !== null
+                    ? capitulo.titulo || capitulo.nome || `Capítulo ${indice + 1}`
+                    : `Capítulo ${indice + 1}`;
+
+                const texto = obterTexto(capitulo);
+
+
+                // SEPARADOR DO CAPÍTULO
+
+                conteudo.push({
+
+                    canvas: [{
+                        type: "line",
+                        x1: 0,
+                        y1: 0,
+                        x2: 515,
+                        y2: 0,
+                        lineWidth: 0.7,
+                        lineColor: "#D8CBB8"
+                    }],
+
+                    margin: [0, 16, 0, 10]
+
+                });
+
+
+                // TÍTULO DO CAPÍTULO
+
+                conteudo.push({
+
+                    text: titulo,
+                    fontSize: 13,
+                    bold: true,
+                    color: this.cores.dourado,
+                    margin: [0, 5, 0, 12],
+                    keepWithNext: true
+
+                });
+
+
+                // TEXTO DO CAPÍTULO
+
+                conteudo.push(...formatarParagrafos(texto));
+
+            });
+
+        } else {
+
+            // COMPATIBILIDADE COM OUTROS FORMATOS DE JSON
+
+            Object.entries(dados).forEach(([chave, valor]) => {
+
+                if (["titulo", "subtitulo"].includes(chave)) {
+                    return;
+                }
+
+                if (chave === "capitulos") {
+                    return;
+                }
+
+                if (typeof valor === "string" || Array.isArray(valor)) {
+
+                    conteudo.push({
+
+                        text: chave,
+                        fontSize: 13,
+                        bold: true,
+                        color: this.cores.dourado,
+                        margin: [0, 18, 0, 8],
+                        keepWithNext: true
+
+                    });
+
+                    conteudo.push(...formatarParagrafos(valor));
+
+                } else if (typeof valor === "object" && valor !== null) {
+
+                    conteudo.push({
+
+                        text: valor.titulo || valor.nome || chave,
+                        fontSize: 13,
+                        bold: true,
+                        color: this.cores.dourado,
+                        margin: [0, 18, 0, 8],
+                        keepWithNext: true
+
+                    });
+
+                    conteudo.push(...formatarParagrafos(obterTexto(valor)));
+
+                }
+
+            });
+
+        }
+
+        return conteudo;
+    },
+
+
+    // ==========================================
+    // CURIOSIDADES
+    // ==========================================
 
     criarCuriosidades(dados) {
-        const conteudo = [
-            {
-                text: "05",
-                style: "numeroCapitulo",
-                pageBreak: "before"
-            },
-            {
-                text: dados.titulo || "Curiosidades",
-                style: "tituloPagina"
-            }
-        ];
 
-        (dados.curiosidades || []).forEach(item => {
-            conteudo.push(
-                {
-                    text: item.titulo,
-                    style: "habilidadeTitulo",
-                    margin: [0, 12, 0, 4],
-                    keepWithNext: true
-                },
-                {
-                    text: item.categoria || "",
-                    style: "observacao",
-                    margin: [0, 0, 0, 5]
-                },
-                {
-                    text: item.descricao,
-                    style: "texto",
+        const conteudo = [];
+
+        conteudo.push({
+
+            text: "CURIOSIDADES",
+            fontSize: 18,
+            bold: true,
+            color: this.cores.dourado,
+            margin: [0, 20, 0, 15]
+
+        });
+
+        let lista = [];
+
+        if (Array.isArray(dados)) {
+
+            lista = dados;
+
+        } else if (dados && Array.isArray(dados.curiosidades)) {
+
+            lista = dados.curiosidades;
+
+        }
+
+        if (lista.length === 0) {
+
+            conteudo.push({
+
+                text: "Nenhuma curiosidade cadastrada.",
+                color: this.cores.cinza
+
+            });
+
+            return conteudo;
+        }
+
+        lista.forEach((item, indice) => {
+
+            if (typeof item === "string") {
+
+                conteudo.push({
+
+                    text: `${indice + 1}. ${item}`,
+                    fontSize: 9,
                     margin: [0, 0, 0, 8]
-                }
-            );
+
+                });
+
+            } else {
+
+                conteudo.push({
+
+                    text: this.texto(item.titulo || item.nome, `Curiosidade ${indice + 1}`),
+                    bold: true,
+                    fontSize: 10,
+                    margin: [0, 5, 0, 3]
+
+                });
+
+                conteudo.push({
+
+                    text: this.texto(item.descricao || item.texto || item.conteudo),
+                    fontSize: 9,
+                    margin: [0, 0, 0, 8]
+
+                });
+
+            }
+
         });
 
         return conteudo;
     },
 
+
+    // ==========================================
+    // DIÁRIO
+    // ==========================================
+
     criarDiario(p) {
-        if (!p.diario || !p.diario.trim()) {
-            return [];
-        }
 
-        return [
-            {
-                text: "06",
-                style: "numeroCapitulo",
-                pageBreak: "before"
-            },
-            {
-                text: "Diário pessoal",
-                style: "tituloPagina"
-            },
-            {
-                text: p.diario,
-                style: "texto",
-                margin: [0, 10, 0, 0]
-            }
-        ];
+        const conteudo = [];
+
+        conteudo.push({
+
+            text: "DIÁRIO PESSOAL",
+            fontSize: 18,
+            bold: true,
+            color: this.cores.dourado,
+            margin: [0, 20, 0, 15]
+
+        });
+
+        conteudo.push({
+
+            text: this.texto(p.diario, "Nenhuma anotação registrada."),
+            fontSize: 10,
+            lineHeight: 1.5
+
+        });
+
+        return conteudo;
     },
 
-    async carregarImagem(caminho) {
-        try {
-            const resposta = await fetch(caminho);
 
-            if (!resposta.ok) return null;
+    // ==========================================
+    // CRONOLOGIA
+    // ==========================================
 
-            const blob = await resposta.blob();
+    criarCronologia(dados) {
 
-            return await new Promise(resolve => {
-                const leitor = new FileReader();
+        const conteudo = [];
 
-                leitor.onload = () => resolve(leitor.result);
-                leitor.onerror = () => resolve(null);
+        conteudo.push({
 
-                leitor.readAsDataURL(blob);
+            text: "CRONOLOGIA",
+            fontSize: 18,
+            bold: true,
+            color: this.cores.dourado,
+            margin: [0, 20, 0, 15]
+
+        });
+
+        if (!dados) {
+
+            conteudo.push({
+
+                text: "Nenhuma cronologia encontrada.",
+                color: this.cores.cinza
+
             });
-        } catch (erro) {
-            console.warn("Imagem não encontrada:", caminho);
-            return null;
+
+            return conteudo;
         }
+
+        const capitulos = Array.isArray(dados)
+            ? dados
+            : dados.capitulos || [];
+
+        if (capitulos.length === 0) {
+
+            conteudo.push({
+
+                text: "Nenhum evento cronológico cadastrado.",
+                color: this.cores.cinza
+
+            });
+
+            return conteudo;
+        }
+
+        capitulos.forEach(capitulo => {
+
+            conteudo.push({
+
+                text: this.texto(capitulo.titulo || capitulo.nome || capitulo.id),
+                fontSize: 13,
+                bold: true,
+                color: this.cores.dourado,
+                margin: [0, 15, 0, 8],
+                keepWithNext: true
+
+            });
+
+            if (!capitulo.eventos || capitulo.eventos.length === 0) {
+                return;
+            }
+
+            capitulo.eventos.forEach(evento => {
+
+                conteudo.push({
+
+                    stack: [
+
+                        {
+                            text: `${this.texto(evento.ano, "Ano desconhecido")} — ${this.texto(evento.titulo)}`,
+                            bold: true,
+                            fontSize: 10,
+                            color: this.cores.texto
+                        },
+
+                        {
+                            text: `Idade: ${this.texto(evento.idade, "Não informada")}`,
+                            fontSize: 8,
+                            color: this.cores.cinza,
+                            margin: [0, 2, 0, 2]
+                        },
+
+                        {
+                            text: `Local: ${this.texto(evento.local, "Não informado")}`,
+                            fontSize: 8,
+                            color: this.cores.cinza,
+                            margin: [0, 0, 0, 4]
+                        },
+
+                        {
+                            text: this.texto(evento.descricao),
+                            fontSize: 9,
+                            lineHeight: 1.3,
+                            margin: [0, 0, 0, 8]
+                        }
+
+                    ],
+
+                    margin: [0, 0, 0, 5]
+
+                });
+
+            });
+
+        });
+
+        return conteudo;
     },
+
+
+    // ==========================================
+    // CARREGAR IMAGEM
+    // ==========================================
+
+    carregarImagem(caminho) {
+
+        return new Promise(resolve => {
+
+            const imagem = new Image();
+
+            imagem.onload = function () {
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = imagem.width;
+                canvas.height = imagem.height;
+
+                const contexto = canvas.getContext("2d");
+
+                contexto.drawImage(imagem, 0, 0);
+
+                resolve(canvas.toDataURL("image/png"));
+
+            };
+
+            imagem.onerror = function () {
+
+                resolve(null);
+
+            };
+
+            imagem.src = caminho;
+
+        });
+
+    },
+
+
+    // ==========================================
+    // GALERIA DE IMAGENS
+    // ==========================================
 
     async criarGaleria() {
-        const imagens = [];
 
-        const retrato = await this.carregarImagem(
-            "assets/personagens/facial.png"
-        );
+        const imagens = [
 
-        if (retrato) {
-            imagens.push({
-                image: retrato,
-                fit: [230, 230],
-                alignment: "center",
-                margin: [0, 10, 0, 15]
-            });
-        }
+            { nome: "Retrato de Vaerik", caminho: "assets/personagens/facial.png" },
+
+            { nome: "Adaga", caminho: "assets/itens/adaga.png" },
+            { nome: "Bolsa", caminho: "assets/itens/bolsa.png" },
+            { nome: "Botas", caminho: "assets/itens/botas.png" },
+            { nome: "Bracelete", caminho: "assets/itens/bracelete.png" },
+            { nome: "Calça", caminho: "assets/itens/calça.png" },
+            { nome: "Camisa", caminho: "assets/itens/camisa.png" },
+            { nome: "Cantil", caminho: "assets/itens/cantil.png" },
+            { nome: "Capa", caminho: "assets/itens/capa.png" },
+            { nome: "Carta", caminho: "assets/itens/carta.png" },
+            { nome: "Cinto", caminho: "assets/itens/cinto.png" },
+            { nome: "Colete", caminho: "assets/itens/colete.png" },
+            { nome: "Corda", caminho: "assets/itens/corda.png" },
+            { nome: "Luva", caminho: "assets/itens/luva.png" },
+            { nome: "Bolsa de moedas", caminho: "assets/itens/monei.png" },
+            { nome: "Brasão", caminho: "assets/itens/brasao.png" }
+
+        ];
+
+
+        // ADICIONA OS SETE TOKENS
 
         for (let i = 1; i <= 7; i++) {
-            const caminho = `assets/tokens/token  (${i}).png`;
-            const imagem = await this.carregarImagem(caminho);
+
+            imagens.push({
+
+                nome: `Token ${i}`,
+                caminho: `assets/tokens/token%20%20(${i}).png`
+
+            });
+
+        }
+
+
+        const conteudo = [];
+
+        conteudo.push({
+
+            text: "GALERIA DE IMAGENS",
+            fontSize: 18,
+            bold: true,
+            color: this.cores.dourado,
+            margin: [0, 20, 0, 15]
+
+        });
+
+
+        const imagensPDF = [];
+
+        for (const item of imagens) {
+
+            const imagem = await this.carregarImagem(item.caminho);
 
             if (imagem) {
-                imagens.push({
+
+                imagensPDF.push({
+
                     stack: [
+
                         {
                             image: imagem,
-                            fit: [180, 180],
+                            fit: [130, 130],
                             alignment: "center"
                         },
+
                         {
-                            text: `Token ${i}`,
-                            style: "observacao",
+                            text: item.nome,
                             alignment: "center",
-                            margin: [0, 5, 0, 12]
+                            fontSize: 8,
+                            color: this.cores.cinza,
+                            margin: [0, 5, 0, 15]
                         }
+
                     ],
-                    width: "50%"
+
+                    width: 160
+
                 });
+
             }
+
         }
 
-        if (!imagens.length) return [];
 
-        return [
-            {
-                text: "07",
-                style: "numeroCapitulo",
-                pageBreak: "before"
-            },
-            {
-                text: "Galeria de tokens",
-                style: "tituloPagina"
-            },
-            ...imagens
-        ];
+        if (imagensPDF.length === 0) {
+
+            conteudo.push({
+
+                text: "Não foi possível carregar as imagens da galeria.",
+                color: this.cores.cinza
+
+            });
+
+            return conteudo;
+        }
+
+
+        // ORGANIZA AS IMAGENS EM DUAS COLUNAS
+
+        for (let i = 0; i < imagensPDF.length; i += 2) {
+
+            conteudo.push({
+
+                columns: [
+
+                    imagensPDF[i],
+
+                    imagensPDF[i + 1] || { text: "" }
+
+                ],
+
+                columnGap: 15,
+                margin: [0, 5, 0, 5]
+
+            });
+
+        }
+
+        return conteudo;
     },
 
-    montarDocumento(p, completo, lore, curiosidades, galeria) {
-        const conteudo = [
-            ...this.criarCapa(p, completo),
-            ...this.criarVisaoGeral(p),
-            ...this.criarFichaTecnica(p),
-            ...this.criarInventario(p)
-        ];
+
+    // ==========================================
+    // MONTAR DOCUMENTO
+    // ==========================================
+
+    montarDocumento(p, completo, lore, curiosidades, cronologia, galeria) {
+
+        const conteudo = [];
+
+        conteudo.push(...this.criarCapa(p));
+
+        conteudo.push(...this.criarVisaoGeral(p));
+
+        conteudo.push(...this.criarFichaTecnica(p));
+
+        conteudo.push(...this.criarInventario(p));
+
 
         if (completo) {
-            conteudo.push(
-                ...this.criarLore(lore),
-                ...this.criarCuriosidades(curiosidades),
-                ...this.criarDiario(p),
-                ...galeria
-            );
+
+            // LORE
+
+            conteudo.push({
+
+                text: "",
+                pageBreak: "before"
+
+            });
+
+            conteudo.push(...this.criarLore(lore));
+
+
+            // CURIOSIDADES
+
+            conteudo.push({
+
+                text: "",
+                pageBreak: "before"
+
+            });
+
+            conteudo.push(...this.criarCuriosidades(curiosidades));
+
+
+            // DIÁRIO
+
+            conteudo.push({
+
+                text: "",
+                pageBreak: "before"
+
+            });
+
+            conteudo.push(...this.criarDiario(p));
+
+
+            // CRONOLOGIA
+
+            conteudo.push({
+
+                text: "",
+                pageBreak: "before"
+
+            });
+
+            conteudo.push(...this.criarCronologia(cronologia));
+
+
+            // GALERIA
+
+            conteudo.push({
+
+                text: "",
+                pageBreak: "before"
+
+            });
+
+            conteudo.push(...galeria);
+
         }
 
+
         return {
+
             pageSize: "A4",
-            pageMargins: [45, 48, 45, 48],
+
+            pageMargins: [40, 55, 40, 55],
 
             content: conteudo,
 
-            styles: this.estilos(),
-
             defaultStyle: {
+
                 font: "Roboto",
-                fontSize: 9,
-                color: this.cores.escuro,
-                lineHeight: 1.3
+                fontSize: 10,
+                color: this.cores.texto
+
             },
 
-            footer: (pagina, total) => ({
-                margin: [45, 15, 45, 0],
-                columns: [
-                    {
-                        text: "CHARACTER CODEX",
-                        alignment: "left",
-                        fontSize: 8,
-                        color: "#999999"
-                    },
-                    {
-                        text: `${pagina} / ${total}`,
-                        alignment: "right",
-                        fontSize: 8,
-                        color: "#999999"
-                    }
-                ]
-            })
-        };
-    },
+            footer: function (pagina, total) {
 
-    async exportar(tipo) {
-        if (typeof pdfMake === "undefined") {
-            alert("A biblioteca pdfmake não foi carregada.");
-            return;
-        }
+                return {
 
-        if (typeof personagem === "undefined") {
-            alert("Os dados do personagem não foram encontrados.");
-            return;
-        }
+                    columns: [
 
-        const p = personagem;
-        const completo = tipo === "completa";
+                        {
+                            text: "CHARACTER CODEX",
+                            alignment: "left",
+                            fontSize: 8,
+                            color: "#999999",
+                            margin: [40, 15, 0, 0]
+                        },
 
-        try {
-            let lore = {};
-            let curiosidades = {};
-            let galeria = [];
+                        {
+                            text: `${pagina} / ${total}`,
+                            alignment: "right",
+                            fontSize: 8,
+                            color: "#999999",
+                            margin: [0, 15, 40, 0]
+                        }
 
-            if (completo) {
-                const [respostaLore, respostaCuriosidades] =
-                    await Promise.all([
-                        fetch("data/lore.json"),
-                        fetch("data/curiosidades.json")
-                    ]);
+                    ]
 
-                if (!respostaLore.ok || !respostaCuriosidades.ok) {
-                    throw new Error(
-                        "Não foi possível carregar lore.json ou curiosidades.json."
-                    );
-                }
+                };
 
-                [lore, curiosidades] = await Promise.all([
-                    respostaLore.json(),
-                    respostaCuriosidades.json()
-                ]);
-
-                galeria = await this.criarGaleria();
             }
 
+        };
+
+    },
+
+
+    // ==========================================
+    // ABRIR SELETOR VISUAL
+    // ==========================================
+
+    abrirSeletor() {
+
+        const modal = document.getElementById("pdf-modal");
+
+        if (!modal) {
+
+            alert("Janela de exportação não encontrada. Confira o modal no index.html.");
+
+            return;
+        }
+
+        modal.classList.add("active");
+
+    },
+
+
+    // ==========================================
+    // FECHAR SELETOR VISUAL
+    // ==========================================
+
+    fecharSeletor() {
+
+        const modal = document.getElementById("pdf-modal");
+
+        if (modal) {
+
+            modal.classList.remove("active");
+
+        }
+
+    },
+
+
+    // ==========================================
+    // EXPORTAR PDF
+    // ==========================================
+
+    async exportar(tipo) {
+
+        // FECHA A JANELA DE SELEÇÃO
+
+        this.fecharSeletor();
+
+        try {
+
+            if (typeof pdfMake === "undefined") {
+
+                alert("A biblioteca pdfMake não foi carregada. Verifique o index.html.");
+
+                return;
+            }
+
+
+            const personagem = carregar();
+
+            if (!personagem) {
+
+                alert("Não foi possível carregar os dados do personagem.");
+
+                return;
+            }
+
+
+            const completo = tipo === "completo";
+
+            let lore = null;
+            let curiosidades = null;
+            let cronologia = null;
+            let galeria = [];
+
+
+            // BUSCA OS ARQUIVOS ADICIONAIS SOMENTE NO PDF COMPLETO
+
+            if (completo) {
+
+                const respostaLore = await fetch("data/lore.json");
+
+                const respostaCuriosidades = await fetch("data/curiosidades.json");
+
+                const respostaCronologia = await fetch("data/cronologia.json");
+
+
+                if (respostaLore.ok) {
+
+                    lore = await respostaLore.json();
+
+                }
+
+                if (respostaCuriosidades.ok) {
+
+                    curiosidades = await respostaCuriosidades.json();
+
+                }
+
+                if (respostaCronologia.ok) {
+
+                    cronologia = await respostaCronologia.json();
+
+                }
+
+
+                galeria = await this.criarGaleria();
+
+            }
+
+
+            // MONTA O DOCUMENTO
+
             const documento = this.montarDocumento(
-                p,
+
+                personagem,
                 completo,
                 lore,
                 curiosidades,
+                cronologia,
                 galeria
+
             );
 
-            const nome = (p.nome || "personagem")
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .replace(/[^a-zA-Z0-9]+/g, "-")
-                .replace(/^-|-$/g, "");
 
-            const sufixo = completo
-                ? "Completo"
-                : "Ficha-Tecnica";
+            // DEFINE O NOME DO ARQUIVO
 
-            pdfMake.createPdf(documento).download(
-                `${nome}-${sufixo}.pdf`
-            );
+            const nome = completo
+
+                ? `${this.nomeArquivo}_Completo.pdf`
+
+                : `${this.nomeArquivo}_Tecnico.pdf`;
+
+
+            // GERA E BAIXA O PDF
+
+            pdfMake.createPdf(documento).download(nome);
+
 
         } catch (erro) {
+
             console.error("Erro ao exportar PDF:", erro);
-            alert(
-                "Não foi possível gerar o PDF. Confira os arquivos JSON e o Live Server."
-            );
+
+            alert("Ocorreu um erro ao gerar o PDF. Verifique o Console do navegador.");
+
         }
-    },
 
-    abrirSeletor() {
-        if (document.getElementById("pdf-export-modal")) return;
-
-        const modal = document.createElement("div");
-        modal.id = "pdf-export-modal";
-
-        modal.style.cssText = `
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: rgba(15, 12, 16, 0.78);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        `;
-
-        modal.innerHTML = `
-            <div style="
-                width: 100%;
-                max-width: 430px;
-                background: #29232B;
-                border: 1px solid #51434B;
-                border-radius: 14px;
-                padding: 28px;
-                color: #F5F1ED;
-                font-family: Inter, sans-serif;
-                box-shadow: 0 20px 60px rgba(0,0,0,.4);
-            ">
-                <div style="
-                    color: #C18A91;
-                    font-size: 11px;
-                    letter-spacing: 3px;
-                    margin-bottom: 8px;
-                ">CHARACTER CODEX</div>
-
-                <h2 style="
-                    font-family: Cinzel, serif;
-                    font-size: 23px;
-                    margin: 0 0 8px;
-                ">Exportar personagem</h2>
-
-                <p style="
-                    color: #B9AFB5;
-                    font-size: 13px;
-                    line-height: 1.6;
-                    margin-bottom: 22px;
-                ">
-                    Escolha o tipo de documento que deseja gerar.
-                </p>
-
-                <button id="pdf-technical" style="
-                    display: block;
-                    width: 100%;
-                    padding: 15px;
-                    margin-bottom: 12px;
-                    border: 1px solid #8B414D;
-                    border-radius: 8px;
-                    background: #8B414D;
-                    color: white;
-                    text-align: left;
-                    cursor: pointer;
-                ">
-                    <strong style="display:block; font-size:14px;">
-                        Ficha técnica
-                    </strong>
-                    <small style="display:block; margin-top:5px; opacity:.85;">
-                        Atributos, perícias, combate, habilidades e inventário.
-                    </small>
-                </button>
-
-                <button id="pdf-complete" style="
-                    display: block;
-                    width: 100%;
-                    padding: 15px;
-                    margin-bottom: 18px;
-                    border: 1px solid #695A64;
-                    border-radius: 8px;
-                    background: #3A323D;
-                    color: white;
-                    text-align: left;
-                    cursor: pointer;
-                ">
-                    <strong style="display:block; font-size:14px;">
-                        Arquivo completo
-                    </strong>
-                    <small style="display:block; margin-top:5px; opacity:.85;">
-                        Tudo da ficha técnica, história, curiosidades, diário e galeria.
-                    </small>
-                </button>
-
-                <button id="pdf-cancel" style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 0;
-                    background: transparent;
-                    color: #B9AFB5;
-                    cursor: pointer;
-                ">Cancelar</button>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        modal.querySelector("#pdf-technical").onclick = () => {
-            modal.remove();
-            this.exportar("tecnica");
-        };
-
-        modal.querySelector("#pdf-complete").onclick = () => {
-            modal.remove();
-            this.exportar("completa");
-        };
-
-        modal.querySelector("#pdf-cancel").onclick = () => {
-            modal.remove();
-        };
-
-        modal.addEventListener("click", e => {
-            if (e.target === modal) modal.remove();
-        });
     }
+
 };
 
 
-// Conectar ao botão existente e remover o antigo window.print()
+// ==========================================
+// DISPONIBILIZAR PARA O HTML
+// ==========================================
 
-document.addEventListener("DOMContentLoaded", () => {
-    const botaoAntigo = document.getElementById("print-sheet");
+window.PDFCodex = PDFCodex;
 
-    if (!botaoAntigo) {
-        console.warn("Botão de exportação não encontrado.");
-        return;
+
+// ==========================================
+// LIGAÇÃO DO BOTÃO DE EXPORTAÇÃO
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const botaoPDF = document.getElementById("print-sheet");
+
+    if (botaoPDF) {
+
+        botaoPDF.addEventListener("click", function () {
+
+            PDFCodex.abrirSeletor();
+
+        });
+
     }
 
-    const botao = botaoAntigo.cloneNode(true);
-
-    botaoAntigo.replaceWith(botao);
-
-    botao.addEventListener("click", () => {
-        PDFCodex.abrirSeletor();
-    });
 });

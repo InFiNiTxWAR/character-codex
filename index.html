@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -10,6 +11,8 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/card.css">
   <link rel="stylesheet" href="css/galeria.css">
+  <link rel="stylesheet" href="css/cronologia.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -39,7 +42,6 @@
         </div>
       </div>
 
-
       <div class="sidebar-character">
 
         <img src="assets/personagens/facial.png" alt="Retrato de Vaerik Vharzeth" onerror="this.style.display='none'">
@@ -50,7 +52,6 @@
         </div>
 
       </div>
-
 
       <nav class="sidebar-nav">
 
@@ -71,7 +72,6 @@
           Inventário
         </button>
 
-
         <span class="nav-label">ARQUIVO PESSOAL</span>
 
         <button class="nav-link" data-page="arquivo">
@@ -86,11 +86,16 @@
 
         <button class="nav-link" data-page="galeria">
           <span>▧</span>
-          Galeria de tokens
+          Galeria de imagens
+        </button>
+
+        <!-- NOVA PÁGINA -->
+        <button class="nav-link" data-page="cronologia">
+          <span>◷</span>
+          Memórias & Cronologia
         </button>
 
       </nav>
-
 
       <div class="sidebar-footer">
         <span>GUARDIÕES DO DESTINO</span>
@@ -146,7 +151,6 @@
 
           </div>
 
-
           <div class="hero-information">
 
             <span class="eyebrow">
@@ -177,62 +181,39 @@
           </div>
         </div>
 
-
         <div class="resource-grid">
 
           <div class="resource-card pv-card">
-
             <span>VIDA</span>
-
             <strong id="dash-pv">15</strong>
-
             <small id="pv-caption">15 / 15</small>
-
             <div class="resource-bar">
               <div id="pv-meter"></div>
             </div>
-
           </div>
 
-
           <div class="resource-card pm-card">
-
             <span>MANA</span>
-
             <strong id="dash-pm">16</strong>
-
             <small id="pm-caption">16 / 16</small>
-
             <div class="resource-bar">
               <div id="pm-meter"></div>
             </div>
-
           </div>
 
-
           <div class="resource-card sanity-card">
-
             <span>SANIDADE</span>
-
             <strong id="dash-san">16</strong>
-
             <small id="san-caption">16 / 16</small>
-
             <div class="resource-bar">
               <div id="san-meter"></div>
             </div>
-
           </div>
 
-
           <div class="resource-card fate-card">
-
             <span>DESTINO</span>
-
             <strong id="dash-fate">3</strong>
-
             <small>Pontos disponíveis</small>
-
           </div>
 
         </div>
@@ -251,7 +232,6 @@
           </button>
         </div>
 
-
         <div class="attributes-grid" id="dashboard-attributes"></div>
 
 
@@ -262,7 +242,6 @@
           <div class="panel">
 
             <span class="eyebrow">IDENTIDADE</span>
-
             <h3>Informações gerais</h3>
 
             <div class="info-row">
@@ -297,11 +276,9 @@
 
           </div>
 
-
           <div class="panel">
 
             <span class="eyebrow">PERSONALIDADE</span>
-
             <h3>O homem por trás do Corvo</h3>
 
             <p>
@@ -339,11 +316,9 @@
           </div>
         </div>
 
-
         <div class="panel">
           <div id="attribute-editor" class="attribute-editor"></div>
         </div>
-
 
         <div class="section-heading">
           <div>
@@ -352,11 +327,9 @@
           </div>
         </div>
 
-
         <div class="panel">
           <div id="resource-editor" class="resource-editor"></div>
         </div>
-
 
         <div class="section-heading">
           <div>
@@ -367,11 +340,9 @@
           <span id="skill-points-label">0 / 6 pontos distribuídos</span>
         </div>
 
-
         <div class="panel table-panel">
 
           <table class="skills-table">
-
             <thead>
               <tr>
                 <th>Perícia</th>
@@ -382,11 +353,9 @@
             </thead>
 
             <tbody id="skills-table"></tbody>
-
           </table>
 
         </div>
-
 
         <div class="section-heading">
           <div>
@@ -395,9 +364,7 @@
           </div>
         </div>
 
-
         <div class="combat-grid" id="combat-values"></div>
-
 
         <div class="section-heading">
           <div>
@@ -405,7 +372,6 @@
             <h3>Características de Vaerik</h3>
           </div>
         </div>
-
 
         <div class="abilities-grid" id="abilities-list"></div>
 
@@ -429,7 +395,6 @@
           </button>
         </div>
 
-
         <div class="capacity-grid">
 
           <div class="panel">
@@ -448,7 +413,6 @@
           </div>
 
         </div>
-
 
         <div class="panel">
 
@@ -480,11 +444,9 @@
           </div>
         </div>
 
-
         <div id="lore-container" class="lore-container">
           <p>Carregando história...</p>
         </div>
-
 
         <div class="section-heading">
           <div>
@@ -492,7 +454,6 @@
             <h3>Diário pessoal</h3>
           </div>
         </div>
-
 
         <div class="panel">
           <textarea id="journal" placeholder="Registre acontecimentos, pistas, nomes e suspeitas..."></textarea>
@@ -513,7 +474,6 @@
             <h3 id="curiosities-title">Curiosidades</h3>
           </div>
         </div>
-
 
         <div id="curiosities-container" class="curiosities-grid">
           <p>Carregando curiosidades...</p>
@@ -541,7 +501,6 @@
         <div class="gallery-intro panel">
           <div>
             <h3>Arquivo visual de Vaerik Vharzeth</h3>
-
             <p>
               Consulte, visualize e baixe os arquivos originais
               de personagens, equipamentos e tokens.
@@ -575,6 +534,59 @@
 
 
       <!-- ================================= -->
+      <!-- MEMÓRIAS & CRONOLOGIA -->
+      <!-- ================================= -->
+
+      <section class="page" id="page-cronologia">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">ARQUIVO HISTÓRICO</span>
+            <h3>Memórias & Cronologia</h3>
+            <p class="muted">
+              Os acontecimentos que marcaram a vida de Vaerik Vharzeth.
+            </p>
+          </div>
+        </div>
+
+        <div id="timeline-container"></div>
+
+      </section>
+
+
+      <!-- ================================= -->
+      <!-- MODAL DA CRONOLOGIA -->
+      <!-- ================================= -->
+
+      <div class="timeline-modal" id="timeline-modal" aria-hidden="true">
+
+        <div class="timeline-modal-card">
+
+          <button class="timeline-modal-close" type="button" onclick="fecharEventoCronologia()" aria-label="Fechar">
+            ×
+          </button>
+
+          <span class="timeline-modal-year" id="timeline-modal-year">
+          </span>
+
+          <h2 id="timeline-modal-title"></h2>
+
+          <img id="timeline-modal-image" class="timeline-modal-image" alt="">
+
+          <p class="timeline-modal-description" id="timeline-modal-description">
+          </p>
+
+          <div class="timeline-modal-meta">
+            <span id="timeline-modal-location"></span>
+            <span id="timeline-modal-chapter"></span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================= -->
       <!-- ÁREA DE IMPRESSÃO -->
       <!-- ================================= -->
 
@@ -588,7 +600,72 @@
         <div id="print-inventory-content"></div>
 
       </section>
+<!-- ================================= -->
+<!-- MODAL DE EXPORTAÇÃO PDF -->
+<!-- ================================= -->
 
+<div id="pdf-modal" class="pdf-modal">
+
+    <div class="pdf-modal-content">
+
+        <button class="pdf-modal-close" onclick="PDFCodex.fecharSeletor()">
+            ×
+        </button>
+
+        <span class="eyebrow">CHARACTER CODEX</span>
+
+        <h2>Exportar personagem</h2>
+
+        <p class="pdf-modal-subtitle">
+            Escolha o formato do documento que deseja gerar.
+        </p>
+
+        <div class="pdf-options">
+
+            <button class="pdf-option" onclick="PDFCodex.exportar('tecnica')">
+
+                <div class="pdf-option-icon">▤</div>
+
+                <div>
+                    <h3>Ficha técnica</h3>
+
+                    <p>
+                        Atributos, recursos, perícias, habilidades
+                        e inventário do personagem.
+                    </p>
+
+                    <span>DOCUMENTO RESUMIDO →</span>
+                </div>
+
+            </button>
+
+
+            <button class="pdf-option" onclick="PDFCodex.exportar('completo')">
+
+                <div class="pdf-option-icon">📜</div>
+
+                <div>
+                    <h3>Arquivo completo</h3>
+
+                    <p>
+                        Ficha técnica, inventário, lore, curiosidades,
+                        diário, cronologia e galeria de imagens.
+                    </p>
+
+                    <span>ARQUIVO COMPLETO →</span>
+                </div>
+
+            </button>
+
+        </div>
+
+        <small class="pdf-modal-footer">
+            VAERIK VHARZETH · GUARDIÕES DO DESTINO
+        </small>
+
+    </div>
+
+</div>
 
       <!-- TOAST -->
 
@@ -603,14 +680,16 @@
   <!-- SCRIPTS -->
   <!-- ================================= -->
 
-  <script src="https://unpkg.com/pdfmake@0.2/build/pdfmake.min.js"></script>
-  <script src="https://unpkg.com/pdfmake@0.2/build/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.js"></script>
 
-  <script src="js/dados.js"></script>
-  <script src="js/abrir-card.js"></script>
-  <script src="js/pdf.js"></script>
-  <script src="js/galeria.js"></script>
-  <script src="js/app.js"></script>
+<script src="js/dados.js"></script>
+<script src="js/abrir-card.js"></script>
+<script src="js/pdf.js"></script>
+<script src="js/galeria.js"></script>
+<script src="js/cronologia.js"></script>
+<script src="js/app.js"></script>
+
 </body>
 
 </html>
